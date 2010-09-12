@@ -1,3 +1,9 @@
+python2.5 (2.5.5-8~ppa2~maverick1) maverick; urgency=low
+
+  * Build against libdb4.8 instead of 4.7.
+
+ -- Felix Krull <f_krull@gmx.de>  Sun, 12 Sep 2010 18:26:30 +0200
+
 python2.5 (2.5.5-8~ppa1) maverick; urgency=low
 
   * Imported from Debian Sid.
