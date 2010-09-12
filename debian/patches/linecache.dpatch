@@ -1,0 +1,40 @@
+#! /bin/sh -e
+
+# DP: Proper handling of packages in linecache.py
+
+dir=
+if [ $# -eq 3 -a "$2" = '-d' ]; then
+    pdir="-d $3"
+    dir="$3/"
+elif [ $# -ne 1 ]; then
+    echo >&2 "usage: `basename $0`: -patch|-unpatch [-d <srcdir>]"
+    exit 1
+fi
+case "$1" in
+    -patch)
+        patch $pdir -f --no-backup-if-mismatch -p0 < $0
+        ;;
+    -unpatch)
+        patch $pdir -f --no-backup-if-mismatch -R -p0 < $0
+        ;;
+    *)
+	echo >&2 "usage: `basename $0`: -patch|-unpatch [-d <srcdir>]"
+        exit 1
+esac
+exit 0
+
+--- Lib/linecache.py.original	2007-07-14 21:00:48.000000000 -0700
++++ Lib/linecache.py	2007-07-14 20:59:16.000000000 -0700
+@@ -104,7 +104,11 @@
+                         )
+                         return cache[filename][2]
+ 
+-        # Try looking through the module search path.
++        # Try looking through the module search path, taking care to handle packages.
++
++        if basename == '__init__.py':
++            # filename referes to a package
++            basename = filename
+ 
+         for dirname in sys.path:
+             # When using imputil, sys.path may contain things other than
