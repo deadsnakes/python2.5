@@ -1,3 +1,9 @@
+python2.5 (2.5.5-8~ppa1~lucid1) lucid; urgency=low
+
+  * Upload for Lucid.
+
+ -- Felix Krull <f_krull@gmx.de>  Sun, 12 Sep 2010 18:07:11 +0200
+
 python2.5 (2.5.5-8~ppa1) maverick; urgency=low
 
   * Imported from Debian Sid.
