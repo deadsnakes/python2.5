@@ -106,8 +106,6 @@ Description: Documentation for the high-level object-oriented language Python (v
 Package: python2.5-tk
 Architecture: any
 Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: python2.3-tk, python2.4-tk
-Replaces: python2.3-tk, python2.4-tk
 Provides: ${python:Provides}
 Suggests: tix, python2.5-tk-dbg
 XB-Python-Version: ${python:Versions}
@@ -118,8 +116,6 @@ Description: Tkinter - Writing Tk applications with Python
 Package: python2.5-gdbm
 Architecture: any
 Depends: ${python:Depends}, ${shlibs:Depends}, ${misc:Depends}
-Conflicts: python2.3-gdbm, python2.4-gdbm
-Replaces: python2.3-gdbm, python2.4-gdbm
 Provides: ${python:Provides}
 Suggests: python2.5-gdbm-dbg
 XB-Python-Version: ${python:Versions}

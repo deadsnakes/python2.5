@@ -3,8 +3,9 @@ python2.5 (2.5.5-8~ppa2~maverick1) maverick; urgency=low
   * Build against libdb4.8 instead of 4.7.
   * Suggest python2.5-profiler instead of python-profiler.
     - That package doesn't exist as well, but it's more likely to match.
+  * Removed Conflicts with python{2.3,2.4}-tk and -gdbm.
 
- -- Felix Krull <f_krull@gmx.de>  Sun, 12 Sep 2010 23:34:20 +0200
+ -- Felix Krull <f_krull@gmx.de>  Mon, 13 Sep 2010 02:10:55 +0200
 
 python2.5 (2.5.5-8~ppa1) maverick; urgency=low
 
