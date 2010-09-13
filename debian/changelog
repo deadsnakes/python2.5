@@ -4,8 +4,9 @@ python2.5 (2.5.5-8~ppa2~maverick1) maverick; urgency=low
   * Suggest python2.5-profiler instead of python-profiler.
     - That package doesn't exist as well, but it's more likely to match.
   * Removed Conflicts with python{2.3,2.4}-tk and -gdbm.
+  * Have Tk and GDBM packages depend on Python.
 
- -- Felix Krull <f_krull@gmx.de>  Mon, 13 Sep 2010 02:10:55 +0200
+ -- Felix Krull <f_krull@gmx.de>  Mon, 13 Sep 2010 16:56:46 +0200
 
 python2.5 (2.5.5-8~ppa1) maverick; urgency=low
 
