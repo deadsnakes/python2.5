@@ -6,8 +6,9 @@ python2.5 (2.5.5-8~ppa2~maverick1) maverick; urgency=low
   * Removed Conflicts with python{2.3,2.4}-tk and -gdbm.
   * Have Tk and GDBM packages depend on Python.
   * Liberally sprinkle Tk and GDBM descriptions with the Python version.
+  * Disable tests upon package build.
 
- -- Felix Krull <f_krull@gmx.de>  Mon, 13 Sep 2010 18:14:01 +0200
+ -- Felix Krull <f_krull@gmx.de>  Tue, 14 Sep 2010 15:16:22 +0200
 
 python2.5 (2.5.5-8~ppa1) maverick; urgency=low
 
