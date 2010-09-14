@@ -117,22 +117,26 @@ scriptdir	=  usr/lib/python$(VER)
 # package names and directories
 p_base	:= $(PVER)
 p_min	:= $(PVER)-minimal
+p_lib	:= lib$(PVER)
 p_tk	:= $(PVER)-tk
 p_gdbm	:= $(PVER)-gdbm
+p_tk_dbg := $(p_tk)-dbg
+p_gdbm_dbg := $(p_gdbm)-dbg
 p_dev	:= $(PVER)-dev
 p_exam	:= $(PVER)-examples
-#p_xml	:= $(PVER)-xmlbase
 p_idle	:= idle-$(PVER)
 p_doc	:= $(PVER)-doc
 p_dbg	:= $(PVER)-dbg
 
 d_base	:= debian/$(p_base)
 d_min	:= debian/$(p_min)
+d_lib	:= debian/$(p_lib)
 d_tk	:= debian/$(p_tk)
 d_gdbm	:= debian/$(p_gdbm)
+d_tk_dbg := debian/$(p_tk_dbg)
+d_gdbm_dbg := debian/$(p_gdbm_dbg)
 d_dev	:= debian/$(p_dev)
 d_exam	:= debian/$(p_exam)
-#d_xml	:= debian/$(p_xml)
 d_idle	:= debian/$(p_idle)
 d_doc	:= debian/$(p_doc)
 d_dbg	:= debian/$(p_dbg)
@@ -762,14 +766,25 @@ endif
 	chmod 755 $(d_dbg)/usr/bin/$(PVER)-dbg-config
 	cp -p $(buildd_debug)/build/lib*/*_d.so \
 		$(d_dbg)/$(scriptdir)/lib-dynload/
-ifneq ($(with_gdbm),yes)
+	
+ifeq ($(with_gdbm),yes)
+	# move debug files to corresponding debug package
+	dh_installdirs -p$(p_gdbm_dbg) $(scriptdir)/lib-dynload
+	dh_install --autodest -p$(p_gdbm_dbg) --sourcedir $(d_dbg) \
+		$(scriptdir)/lib-dynload/gdbm_d.so
+endif
 	rm -f $(d_dbg)/$(scriptdir)/lib-dynload/gdbm_d.so
 	rm -f $(d_dbg)/usr/lib/debug/$(scriptdir)/lib-dynload/gdbm.so
+	
+ifeq ($(with_tk),yes)
+	# move debug files to corresponding debug package
+	dh_installdirs -p$(p_tk_dbg) $(scriptdir)/lib-dynload
+	dh_install --autodest -p$(p_tk_dbg) --sourcedir $(d_dbg) \
+		$(scriptdir)/lib-dynload/_tkinter_d.so
 endif
-ifneq ($(with_tk),yes)
 	rm -f $(d_dbg)/$(scriptdir)/lib-dynload/_tkinter_d.so
 	rm -f $(d_dbg)/usr/lib/debug/$(scriptdir)/lib-dynload/_tkinter.so
-endif
+	
 	cp -a $(d)-dbg/$(scriptdir)/config_d $(d_dbg)/$(scriptdir)/
 	for i in $(d_dev)/usr/include/$(PVER)/*; do \
 	  i=$$(basename $$i); \
@@ -859,13 +874,18 @@ binary-arch: build install
 	  ln -s $(p_base) debian/$$i/usr/share/doc/$$i; \
 	done
 	-find debian ! -perm -200 -print -exec chmod +w {} \;
+	
 ifneq ($(with_tk),yes)
 	rm -f $(d_base)/$(scriptdir)/lib-dynload/_tkinter.so
+else
+	dh_strip -p$(p_tk) --dbg-package=$(p_tk_dbg)
 endif
 ifneq ($(with_gdbm),yes)
 	rm -f $(d_base)/$(scriptdir)/lib-dynload/gdbm.so
+else
+	dh_strip -p$(p_gdbm) --dbg-package=$(p_gdbm_dbg)
 endif
-	dh_strip -a -N$(p_dbg) -Xdebug -Xdbg --dbg-package=$(p_dbg)
+	dh_strip -a -N$(p_dbg) -N$(p_tk) -N$(p_gdbm) -Xdebug -Xdbg --dbg-package=$(p_dbg)
 	dh_link -a
 	dh_compress -a -X.py
 	dh_fixperms -a
