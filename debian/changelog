@@ -1,3 +1,9 @@
+python2.5 (2.5.5-8~ppa2~natty1) natty; urgency=low
+
+  * Imported from Maverick.
+
+ -- Felix Krull <f_krull@gmx.de>  Thu, 14 Apr 2011 23:00:30 +0200
+
 python2.5 (2.5.5-8~ppa2~maverick1) maverick; urgency=low
 
   * Build against libdb4.8 instead of 4.7.
