@@ -42,6 +42,8 @@ export NVER=2.6
 export PVER=python2.5
 export PRIORITY=$(shell echo $(VER) | tr -d '.')0
 
+export DEB_BUILD_GNU_TYPE=$(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
 PREVVER	:= $(shell awk '/^python/ && NR > 1 {print substr($$2,2,length($$2)-2); exit}' debian/changelog)
 
 # default versions are built from the python-defaults source package
@@ -957,6 +959,7 @@ debian_patches = \
 	issue8233 \
 	issue7332 \
 	issue8329 \
+	natty-search-new-library-dirs
 
 #	svn-updates \
 #	svn-doc-updates \
