@@ -42,7 +42,7 @@ export NVER=2.6
 export PVER=python2.5
 export PRIORITY=$(shell echo $(VER) | tr -d '.')0
 
-export DEB_BUILD_GNU_TYPE=$(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+export DEB_BUILD_MULTIARCH=$(shell dpkg-architecture -qDEB_BUILD_MULTIARCH)
 
 PREVVER	:= $(shell awk '/^python/ && NR > 1 {print substr($$2,2,length($$2)-2); exit}' debian/changelog)
 
