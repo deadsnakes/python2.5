@@ -1,8 +1,13 @@
+python2.5 (2.5.5-8~ppa2~natty2) natty; urgency=low
+
+  * Added new Natty lib directories to library search path so libraries in there
+    are found.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 15 Apr 2011 17:38:58 +0200
+
 python2.5 (2.5.5-8~ppa2~natty1) natty; urgency=low
 
   * Imported from Maverick.
-  * Added new Natty lib directories to library search path so libraries in there
-    get found.
 
  -- Felix Krull <f_krull@gmx.de>  Fri, 15 Apr 2011 17:06:58 +0200
 

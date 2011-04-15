@@ -959,7 +959,7 @@ debian_patches = \
 	issue8233 \
 	issue7332 \
 	issue8329 \
-	natty-search-new-library-dirs
+	natty-search-new-library-dirs \
 
 #	svn-updates \
 #	svn-doc-updates \
