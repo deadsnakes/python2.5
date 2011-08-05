@@ -41,3 +41,6 @@ doc-faq.diff
 
 # This patch is Ubuntu-specific; remove it if you're targeting something else.
 gettext-use-ubuntu-langpacks.diff
+
+# This one is Natty-and-newer-specific
+deadsnakes-multiarch-library-dirs.diff
