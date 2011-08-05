@@ -547,14 +547,16 @@ endif
 	dh_installdirs -p$(p_min) \
 		usr/bin \
 		usr/share/man/man1 \
-		$(scriptdir)
+		$(scriptdir) \
+		$(scriptdir)/site-packages
 	DH_COMPAT=2 dh_movefiles -p$(p_min) --sourcedir=$(d) \
 		usr/bin/python$(VER) \
 		usr/share/man/man1/python$(VER).1 \
 		$(foreach i,$(MIN_EXTS),$(scriptdir)/lib-dynload/$(i).so) \
 		$(foreach i,$(MIN_MODS),$(scriptdir)/$(i).py) \
 		$(foreach i,$(MIN_ENCODINGS),$(scriptdir)/$(i)) \
-		$(scriptdir)/site.py
+		$(scriptdir)/site.py \
+		$(scriptdir)/site-packages/pep-370-per-user-site-packages.pth
 
 ifneq ($(with_interp),static)
 	DH_COMPAT=2 dh_movefiles -p$(p_min) --sourcedir=$(d) \
