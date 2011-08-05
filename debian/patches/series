@@ -13,7 +13,6 @@ linecache.diff
 hurd-broken-poll.diff
 issue961805.diff
 signal.set_wakeup_fd.diff
-signal.set_wakeup_fd-doc.diff
 no-zip-on-sys.path.diff
 issue1813.diff
 linux2-platforms.diff
@@ -35,3 +34,6 @@ issue8329.diff
 
 fpectl-module.diff
 arm-float.diff
+
+signal.set_wakeup_fd-doc.diff
+doc-faq.diff
