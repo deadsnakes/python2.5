@@ -16,7 +16,7 @@ Package: @PVER@
 Architecture: any
 Priority: @PRIO@
 Depends: @PVER@-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
-Suggests: @PVER@-doc, @PVER@-profiler
+Suggests: @PVER@-doc
 Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, python@VER@-celementtree, python@VER@-wsgiref, python@VER@-plistlib, @PVER@-profiler
 Replaces: @PVER@-minimal (<< 2.5), @PVER@-dev (<< 2.5.1), idle-@PVER@ (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
 Conflicts: python-central (<< 0.5.9), idle-@PVER@ (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)

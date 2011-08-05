@@ -16,7 +16,7 @@ Package: python2.5
 Architecture: any
 Priority: optional
 Depends: python2.5-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
-Suggests: python2.5-doc, python2.5-profiler
+Suggests: python2.5-doc
 Provides: python2.5-cjkcodecs, python2.5-ctypes, python2.5-elementtree, python2.5-celementtree, python2.5-wsgiref, python2.5-plistlib, python2.5-profiler
 Replaces: python2.5-minimal (<< 2.5), python2.5-dev (<< 2.5.1), idle-python2.5 (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
 Conflicts: python-central (<< 0.5.9), idle-python2.5 (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)

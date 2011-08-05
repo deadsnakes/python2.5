@@ -1,3 +1,14 @@
+python2.5 (2.5.6-0~ppa1~lucid1) lucid; urgency=low
+
+  * Imported new upstream version 2.5.6.
+  * Include Lib/{profile,pstats}.py.
+    - Those are not DFSG-free, but redistributable, so they go with
+      Launchpad's PPA Terms of Use.
+    - Also have python2.5 provide python2.5-profiler (and not suggest
+      it any more).
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 05 Aug 2011 11:11:29 +0200
+
 python2.5 (2.5.5-8~ppa2~lucid1) lucid; urgency=low
 
   * Import from Maverick.
