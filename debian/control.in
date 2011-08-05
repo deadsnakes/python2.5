@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5), autoconf, libreadline-dev, libncursesw5-dev (>=
 Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, @PVER@-xml, python-xml
 XS-Python-Version: @VER@
-Standards-Version: 3.8.4
+Standards-Version: 3.9.1
 Homepage: http://python.org/
 Vcs-Browser: https://code.launchpad.net/~doko/python/pkg@VER@
 Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg@VER@
@@ -17,7 +17,7 @@ Architecture: any
 Priority: @PRIO@
 Depends: @PVER@-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: @PVER@-doc, @PVER@-profiler
-Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, python@VER@-celementtree, python@VER@-wsgiref, python@VER@-plistlib
+Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, python@VER@-celementtree, python@VER@-wsgiref, python@VER@-plistlib, @PVER@-profiler
 Replaces: @PVER@-minimal (<< 2.5), @PVER@-dev (<< 2.5.1), idle-@PVER@ (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
 Conflicts: python-central (<< 0.5.9), idle-@PVER@ (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
 XB-Python-Version: @VER@
@@ -76,7 +76,7 @@ Section: debug
 Architecture: any
 Priority: extra
 Depends: @PVER@ (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Suggests: python-gdbm-dbg, python-tk-dbg
+Suggests: @PVER@-gdbm-dbg, @PVER@-tk-dbg
 Description: Debug Build of the Python Interpreter (version @VER@)
  Python interpreter configured with --pydebug. Dynamically loaded modules are
  searched in /usr/lib/@PVER@/lib-dynload/debug first.
@@ -146,6 +146,7 @@ Priority: extra
 Section: debug
 Depends: @PVER@, ${python:Depends}, @PVER@-gdbm (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Conflicts: python-gdbm-deadsnakes-dbg
+Replaces: python-gdbm-deadsnakes-dbg
 Description: GNU dbm database support for Python (v@VER@ debug extension)
  GNU dbm database module for Python (v@VER@). Install this if you want to
  create or read GNU dbm database files with Python.
