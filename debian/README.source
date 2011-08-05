@@ -1,7 +1,8 @@
-To apply the patches included in the package, run
-
-	debian/rules patch
-
-To unapply the patches, run
-
-	debian/rules unpatch
+README.source for python2.5
+---------------------------
+The package uses the "3.0 (quilt)" source format so patches recorded in
+debian/patches/series are applied automatically. However, since some patches
+might modify `configure.in` without also patching `configure` (which is
+generated from `configure.in`, so that would be pointless), `debian/rules`
+provides a `patch` target that regenerates `configure`. The build process will
+perfom this step automatically if required, however.
