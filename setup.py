@@ -244,8 +244,9 @@ class PyBuildExt(build_ext):
 
     def detect_modules(self):
         # Ensure that /usr/local is always used
-        add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
-        add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
+        # On Debian /usr/local is always used, so we don't include it twice
+        #add_dir_to_list(self.compiler.library_dirs, '/usr/local/lib')
+        #add_dir_to_list(self.compiler.include_dirs, '/usr/local/include')
 
         # Add paths specified in the environment variables LDFLAGS and
         # CPPFLAGS for header and library files.
@@ -300,6 +301,8 @@ class PyBuildExt(build_ext):
             '/lib', '/usr/lib',
             ]
         inc_dirs = self.compiler.include_dirs + ['/usr/include']
+        gnu_triplet = os.popen('dpkg-architecture -qDEB_HOST_GNU_TYPE').readline()[:-1]; print 'XXX', gnu_triplet
+        inc_dirs.append(os.path.join('/usr/include', gnu_triplet))
         exts = []
 
         config_h = sysconfig.get_config_h_filename()
@@ -954,6 +957,11 @@ class PyBuildExt(build_ext):
             exts.append( Extension('_curses_panel', ['_curses_panel.c'],
                                    libraries = [panel_library] + curses_libs) )
 
+        # Build `fpectl` module if Python is configured with --with-fpectl
+        data = open('pyconfig.h').read()
+        m = re.search(r"#\s*define\s+WANT_SIGFPE_HANDLER\s+1\s*", data)
+        if m is not None:
+            exts.append(Extension('fpectl', ['fpectlmodule.c']))
 
         # Andrew Kuchling's zlib module.  Note that some versions of zlib
         # 1.1.3 have security problems.  See CERT Advisory CA-2002-07:
@@ -1056,12 +1064,14 @@ class PyBuildExt(build_ext):
         self.detect_ctypes(inc_dirs, lib_dirs)
 
         # Platform-specific libraries
-        if platform == 'linux2':
+        if platform in ('linux2', 'linux2-alpha', 'linux2-hppa',
+                        'linux2-mips', 'linux2-sparc'):
             # Linux-specific modules
             exts.append( Extension('linuxaudiodev', ['linuxaudiodev.c']) )
 
-        if platform in ('linux2', 'freebsd4', 'freebsd5', 'freebsd6',
-                        'freebsd7'):
+        if platform in ('linux2', 'linux2-alpha', 'linux2-hppa',
+                        'linux2-mips', 'linux2-sparc',
+                        'freebsd4', 'freebsd5', 'freebsd6', 'freebsd7'):
             exts.append( Extension('ossaudiodev', ['ossaudiodev.c']) )
 
         if platform == 'sunos5':

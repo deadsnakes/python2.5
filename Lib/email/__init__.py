@@ -109,15 +109,18 @@ _MIMENAMES = [
     'Text',
     ]
 
+import string
+lower_map = string.maketrans(string.ascii_uppercase, string.ascii_lowercase)
+
 for _name in _LOWERNAMES:
-    importer = LazyImporter(_name.lower())
+    importer = LazyImporter(_name.translate(lower_map))
     sys.modules['email.' + _name] = importer
     setattr(sys.modules['email'], _name, importer)
 
 
 import email.mime
 for _name in _MIMENAMES:
-    importer = LazyImporter('mime.' + _name.lower())
+    importer = LazyImporter('mime.' + _name.translate(lower_map))
     sys.modules['email.MIME' + _name] = importer
     setattr(sys.modules['email'], 'MIME' + _name, importer)
     setattr(sys.modules['email.mime'], _name, importer)

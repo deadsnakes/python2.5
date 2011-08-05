@@ -1627,6 +1627,7 @@ class Helper:
         for dir in [os.environ.get('PYTHONDOCS'),
                     homedir and os.path.join(homedir, 'doc'),
                     os.path.join(execdir, 'doc'),
+                    '/usr/share/doc/python' + sys.version[:3] + '-doc/html',
                     '/usr/doc/python-docs-' + split(sys.version)[0],
                     '/usr/doc/python-' + split(sys.version)[0],
                     '/usr/doc/python-docs-' + sys.version[:3],
@@ -1742,8 +1743,8 @@ Sorry, topic and keyword documentation is not available because the Python
 HTML documentation files could not be found.  If you have installed them,
 please set the environment variable PYTHONDOCS to indicate their location.
 
-On the Microsoft Windows operating system, the files can be built by
-running "hh -decompile . PythonNN.chm" in the C:\PythonNN\Doc> directory.
+On Debian GNU/{Linux,Hurd} systems you have to install the corresponding
+pythonX.Y-doc package, i.e. python2.5-doc.
 ''')
             return
         target = self.topics.get(topic, self.keywords.get(topic))

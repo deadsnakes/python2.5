@@ -179,6 +179,17 @@ then
 	MACHDEP="$ac_md_system$ac_md_release"
 
 	case $MACHDEP in
+	linux2*)
+	    ac_sys_machine=`uname -m`
+	    ac_md_machine=`echo $ac_sys_machine |
+				tr -d '[/ ]' | tr '[[A-Z]]' '[[a-z]]'`
+	    case $ac_md_machine in
+	    alpha*) MACHDEP="$MACHDEP-alpha" ;;
+	    parisc*) MACHDEP="$MACHDEP-hppa" ;;
+	    mips*) MACHDEP="$MACHDEP-mips" ;;
+	    sparc*) MACHDEP="$MACHDEP-sparc" ;;
+	    esac
+	    ;;
 	cygwin*) MACHDEP="cygwin";;
 	darwin*) MACHDEP="darwin";;
 	atheos*) MACHDEP="atheos";;
@@ -730,6 +741,12 @@ then
 else AC_MSG_RESULT(no); Py_DEBUG='false'
 fi],
 [AC_MSG_RESULT(no)])
+
+if test "$Py_DEBUG" = 'true'
+then
+	DEBUG_EXT=_d
+fi
+AC_SUBST(DEBUG_EXT)
 
 # XXX Shouldn't the code above that fiddles with BASECFLAGS and OPT be
 # merged with this chunk of code?
@@ -1413,7 +1430,7 @@ then
 		esac
 		;;
 	CYGWIN*)   SO=.dll;;
-	*)	   SO=.so;;
+	*)	   SO=$DEBUG_EXT.so;;
 	esac
 else
 	# this might also be a termcap variable, see #610332
@@ -1512,7 +1529,7 @@ then
 			fi
 		fi
 		;;
-	Linux*|GNU*) LDSHARED='$(CC) -shared';;
+	Linux*|GNU*) LDSHARED='$(CC) -shared -Wl,-O1 -Wl,-Bsymbolic-functions';;
 	BSD/OS*/4*) LDSHARED="gcc -shared";;
 	FreeBSD*)
 		if [[ "`$CC -dM -E - </dev/null | grep __ELF__`" != "" ]]
@@ -1599,7 +1616,7 @@ then
 	    LINKFORSHARED="-Wl,-E -Wl,+s";;
 #	    LINKFORSHARED="-Wl,-E -Wl,+s -Wl,+b\$(BINLIBDEST)/lib-dynload";;
 	BSD/OS/4*) LINKFORSHARED="-Xlinker -export-dynamic";;
-	Linux*|GNU*) LINKFORSHARED="-Xlinker -export-dynamic";;
+	Linux*|GNU*) LINKFORSHARED="-Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions";;
 	# -u libsys_s pulls in all symbols in libsys
 	Darwin/*) 
 		# -u _PyMac_Error is needed to pull in the mac toolbox glue,
@@ -3135,6 +3152,10 @@ then
   [readline/readline.h],
   AC_DEFINE(HAVE_RL_COMPLETION_APPEND_CHARACTER, 1,
   [Define if you have readline 2.2]), )
+  AC_EGREP_HEADER([extern int rl_completion_suppress_append;],
+  [readline/readline.h],
+  AC_DEFINE(HAVE_RL_COMPLETION_SUPPRESS_APPEND, 1,
+  [Define if you have rl_completion_suppress_append]), )
 fi
 
 # check for readline 4.0
