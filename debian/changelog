@@ -1,3 +1,17 @@
+python2.5 (2.5.6-0~ppa1~lucid1) lucid; urgency=low
+
+  * Imported new upstream version 2.5.6.
+  * Include Lib/{profile,pstats}.py.
+    - Those are not DFSG-free, but redistributable, so they go with
+      Launchpad's PPA Terms of Use.
+    - Also have python2.5 provide python2.5-profiler (and not suggest
+      it any more).
+  * Add support for PEP 370, per-user site-packages directories.
+    - Upstream only has that feature since 2.6/3.0, but I think it's
+      cool, so I included it. See http://python.org/dev/peps/pep-0370/.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 05 Aug 2011 16:02:20 +0200
+
 python2.5 (2.5.5-8~ppa2~natty3) natty; urgency=low
 
   * Used proper replacement variable so the package builds on i386.

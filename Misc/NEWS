@@ -4,6 +4,33 @@ Python News
 
 (editors: check NEWS.help for information about editing NEWS using ReST.)
 
+What's New in Python 2.5.6?
+===========================
+
+*Release date: 26-May-2011*
+
+
+What's New in Python 2.5.6c1?
+=============================
+
+*Release date: 17-Apr-2011*
+
+Library
+-------
+
+- Issue #11442: Add a charset parameter to the Content-type in SimpleHTTPServer
+  to avoid XSS attacks.
+
+- Issue #11662: Make urllib and urllib2 ignore redirections if the
+  scheme is not HTTP, HTTPS or FTP (CVE-2011-1521).
+
+- Issue #8674: Fixed a number of incorrect or undefined-behaviour-inducing
+  overflow checks in the audioop module (CVE-2010-1634).
+
+- Issue #7673: Fix security vulnerability (CVE-2010-2089) in the audioop
+  module, ensure that the input string length is a multiple of the frame size.
+
+
 What's New in Python 2.5.5?
 ===========================
 

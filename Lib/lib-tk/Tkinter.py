@@ -35,7 +35,10 @@ __version__ = "$Revision: 67737 $"
 import sys
 if sys.platform == "win32":
     import FixTk # Attempt to configure Tcl/Tk without requiring PATH
-import _tkinter # If this fails your Python may not be configured for Tk
+try:
+    import _tkinter
+except ImportError, msg:
+    raise ImportError, str(msg) + ', please install the python%s.%s-tk package' % sys.version_info[:2]
 tkinter = _tkinter # b/w compat for export
 TclError = _tkinter.TclError
 from types import *
@@ -2934,8 +2937,7 @@ class Text(Widget):
         and edit_undo
 
         """
-        return self._getints(
-            self.tk.call((self._w, 'edit') + args)) or ()
+        return self.tk.call((self._w, 'edit') + args)
 
     def edit_modified(self, arg=None):
         """Get or Set the modified flag

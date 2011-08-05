@@ -45,6 +45,11 @@ int PyCodec_Register(PyObject *search_function)
     return -1;
 }
 
+/* isupper() forced into the ASCII Locale */
+#define ascii_isupper(x) (((x) >= 0x41) && ((x) <= 0x5A))
+/* tolower() forced into the ASCII Locale */
+#define ascii_tolower(x) (ascii_isupper(x) ? ((x) + 0x20) : (x))
+
 /* Convert a string to a normalized Python string: all characters are
    converted to lower case, spaces are replaced with underscores. */
 
@@ -70,7 +75,7 @@ PyObject *normalizestring(const char *string)
         if (ch == ' ')
             ch = '-';
         else
-            ch = tolower(Py_CHARMASK(ch));
+            ch = ascii_tolower(Py_CHARMASK(ch));
 	p[i] = ch;
     }
     return v;

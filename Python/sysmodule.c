@@ -960,7 +960,7 @@ _check_and_flush (FILE *stream)
 
 /* Subversion branch and revision management */
 static const char _patchlevel_revision[] = PY_PATCHLEVEL_REVISION;
-static const char headurl[] = "$HeadURL: svn+ssh://pythondev@svn.python.org/python/tags/r255/Python/sysmodule.c $";
+static const char headurl[] = "$HeadURL: svn+ssh://pythondev@svn.python.org/python/tags/r256/Python/sysmodule.c $";
 static int svn_initialized;
 static char patchlevel_revision[50]; /* Just the number */
 static char branch[50];
@@ -978,8 +978,13 @@ svnversion_init(void)
 		return;
 
 	python = strstr(headurl, "/python/");
-	if (!python)
-		Py_FatalError("subversion keywords missing");
+	if (!python) {
+		*patchlevel_revision = '\0';
+		strcpy(branch, "");
+		strcpy(shortbranch, "unknown");
+		svn_revision = "";
+		return;
+	}
 
 	br_start = python + 8;
 	br_end = strchr(br_start, '/');
@@ -1190,6 +1195,11 @@ _PySys_Init(void)
 			    PyLong_FromVoidPtr(PyWin_DLLhModule));
 	SET_SYS_FROM_STRING("winver",
 			    PyString_FromString(PyWin_DLLVersionString));
+#endif
+#ifdef Py_DEBUG
+	PyDict_SetItemString(sysdict, "pydebug", Py_True);
+#else
+	PyDict_SetItemString(sysdict, "pydebug", Py_False);
 #endif
 #undef SET_SYS_FROM_STRING
 	if (warnoptions == NULL) {

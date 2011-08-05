@@ -656,13 +656,13 @@ class Popen(object):
             stderr = None
             if self.stdin:
                 if input:
-                    self.stdin.write(input)
+                    self._fo_write_no_intr(self.stdin, input)
                 self.stdin.close()
             elif self.stdout:
-                stdout = self.stdout.read()
+                stdout = self._fo_read_no_intr(self.stdout)
                 self.stdout.close()
             elif self.stderr:
-                stderr = self.stderr.read()
+                stderr = self._fo_read_no_intr(self.stderr)
                 self.stderr.close()
             self.wait()
             return (stdout, stderr)
@@ -984,6 +984,62 @@ class Popen(object):
                     pass
 
 
+        def _read_no_intr(self, fd, buffersize):
+            """Like os.read, but retries on EINTR"""
+            while True:
+                try:
+                    return os.read(fd, buffersize)
+                except OSError, e:
+                    if e.errno == errno.EINTR:
+                        continue
+                    else:
+                        raise
+
+
+        def _write_no_intr(self, fd, s):
+            """Like os.write, but retries on EINTR"""
+            while True:
+                try:
+                    return os.write(fd, s)
+                except OSError, e:
+                    if e.errno == errno.EINTR:
+                        continue
+                    else:
+                        raise
+
+        def _waitpid_no_intr(self, pid, options):
+            """Like os.waitpid, but retries on EINTR"""
+            while True:
+                try:
+                    return os.waitpid(pid, options)
+                except OSError, e:
+                    if e.errno == errno.EINTR:
+                        continue
+                    else:
+                        raise
+
+        def _fo_read_no_intr(self, obj):
+            """Like obj.read(), but retries on EINTR"""
+            while True:
+                try:
+                    return obj.read()
+                except IOError, e:
+                    if e.errno == errno.EINTR:
+                        continue
+                    else:
+                        raise
+
+        def _fo_write_no_intr(self, obj, data):
+            """Like obj.write(), but retries on EINTR"""
+            while True:
+                try:
+                    return obj.write(data)
+                except IOError, e:
+                    if e.errno == errno.EINTR:
+                        continue
+                    else:
+                        raise
+
         def _execute_child(self, args, executable, preexec_fn, close_fds,
                            cwd, env, universal_newlines,
                            startupinfo, creationflags, shell,
@@ -1071,7 +1127,7 @@ class Popen(object):
                                                            exc_value,
                                                            tb)
                     exc_value.child_traceback = ''.join(exc_lines)
-                    os.write(errpipe_write, pickle.dumps(exc_value))
+                    self._write_no_intr(errpipe_write, pickle.dumps(exc_value))
 
                 # This exitcode won't be reported to applications, so it
                 # really doesn't matter what we return.
@@ -1089,10 +1145,10 @@ class Popen(object):
                 os.close(errwrite)
 
             # Wait for exec to fail or succeed; possibly raising exception
-            data = os.read(errpipe_read, 1048576) # Exceptions limited to 1 MB
+            data = self._read_no_intr(errpipe_read, 1048576) # Exceptions limited to 1 MB
             os.close(errpipe_read)
             if data != "":
-                os.waitpid(self.pid, 0)
+                self._waitpid_no_intr(self.pid, 0)
                 child_exception = pickle.loads(data)
                 raise child_exception
 
@@ -1112,7 +1168,7 @@ class Popen(object):
             attribute."""
             if self.returncode is None:
                 try:
-                    pid, sts = os.waitpid(self.pid, os.WNOHANG)
+                    pid, sts = self._waitpid_no_intr(self.pid, os.WNOHANG)
                     if pid == self.pid:
                         self._handle_exitstatus(sts)
                 except os.error:
@@ -1125,7 +1181,7 @@ class Popen(object):
             """Wait for child process to terminate.  Returns returncode
             attribute."""
             if self.returncode is None:
-                pid, sts = os.waitpid(self.pid, 0)
+                pid, sts = self._waitpid_no_intr(self.pid, 0)
                 self._handle_exitstatus(sts)
             return self.returncode
 
@@ -1164,21 +1220,21 @@ class Popen(object):
                     # When select has indicated that the file is writable,
                     # we can write up to PIPE_BUF bytes without risk
                     # blocking.  POSIX defines PIPE_BUF >= 512
-                    bytes_written = os.write(self.stdin.fileno(), buffer(input, input_offset, 512))
+                    bytes_written = self._write_no_intr(self.stdin.fileno(), buffer(input, input_offset, 512))
                     input_offset += bytes_written
                     if input_offset >= len(input):
                         self.stdin.close()
                         write_set.remove(self.stdin)
 
                 if self.stdout in rlist:
-                    data = os.read(self.stdout.fileno(), 1024)
+                    data = self._read_no_intr(self.stdout.fileno(), 1024)
                     if data == "":
                         self.stdout.close()
                         read_set.remove(self.stdout)
                     stdout.append(data)
 
                 if self.stderr in rlist:
-                    data = os.read(self.stderr.fileno(), 1024)
+                    data = self._read_no_intr(self.stderr.fileno(), 1024)
                     if data == "":
                         self.stderr.close()
                         read_set.remove(self.stderr)
