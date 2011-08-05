@@ -1,3 +1,9 @@
+python2.5 (2.5.6-0~ppa1~maverick1) maverick; urgency=low
+
+  * Imported from Lucid package.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 05 Aug 2011 18:17:12 +0200
+
 python2.5 (2.5.6-0~ppa1~lucid1) lucid; urgency=low
 
   * Imported new upstream version 2.5.6.
