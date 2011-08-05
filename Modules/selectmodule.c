@@ -287,14 +287,6 @@ select_select(PyObject *self, PyObject *args)
 		PyErr_SetFromErrno(SelectError);
 	}
 #endif
-	else if (n == 0) {
-                /* optimization */
-		ifdlist = PyList_New(0);
-		if (ifdlist) {
-			ret = PyTuple_Pack(3, ifdlist, ifdlist, ifdlist);
-			Py_DECREF(ifdlist);
-		}
-	}
 	else {
 		/* any of these three calls can raise an exception.  it's more
 		   convenient to test for this after all three calls... but
@@ -674,7 +666,7 @@ On Windows and OpenVMS, only sockets are supported; on Unix, all file descriptor
 
 static PyMethodDef select_methods[] = {
     {"select",	select_select, METH_VARARGS, select_doc},
-#if defined(HAVE_POLL) 
+#if defined(HAVE_POLL) && !defined(HAVE_BROKEN_POLL)
     {"poll",    select_poll,   METH_NOARGS, poll_doc},
 #endif /* HAVE_POLL */
     {0,  	0},			     /* sentinel */
@@ -697,7 +689,7 @@ initselect(void)
 	SelectError = PyErr_NewException("select.error", NULL, NULL);
 	Py_INCREF(SelectError);
 	PyModule_AddObject(m, "error", SelectError);
-#if defined(HAVE_POLL) 
+#if defined(HAVE_POLL) && !defined(HAVE_BROKEN_POLL)
 
 #ifdef __APPLE__
 	if (select_have_broken_poll()) {

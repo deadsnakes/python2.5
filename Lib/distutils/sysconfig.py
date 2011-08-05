@@ -65,7 +65,8 @@ def get_python_inc(plat_specific=0, prefix=None):
                 if not os.path.exists(inc_dir):
                     inc_dir = os.path.join(os.path.dirname(base), "Include")
             return inc_dir
-        return os.path.join(prefix, "include", "python" + get_python_version())
+        return os.path.join(prefix, "include",
+                            "python" + get_python_version() + (sys.pydebug and '_d' or ''))
     elif os.name == "nt":
         return os.path.join(prefix, "include")
     elif os.name == "mac":
@@ -146,8 +147,8 @@ def customize_compiler(compiler):
     varies across Unices and is stored in Python's Makefile.
     """
     if compiler.compiler_type == "unix":
-        (cc, cxx, opt, cflags, ccshared, ldshared, so_ext) = \
-            get_config_vars('CC', 'CXX', 'OPT', 'CFLAGS',
+        (cc, cxx, opt, extra_cflags, basecflags, cflags, ccshared, ldshared, so_ext) = \
+            get_config_vars('CC', 'CXX', 'OPT', 'EXTRA_CFLAGS', 'BASECFLAGS', 'CFLAGS',
                             'CCSHARED', 'LDSHARED', 'SO')
 
         if os.environ.has_key('CC'):
@@ -162,8 +163,13 @@ def customize_compiler(compiler):
             cpp = cc + " -E"           # not always
         if os.environ.has_key('LDFLAGS'):
             ldshared = ldshared + ' ' + os.environ['LDFLAGS']
+        if os.environ.has_key('BASECFLAGS'):
+            basecflags = os.environ['BASECFLAGS']
+        if os.environ.has_key('OPT'):
+            opt = os.environ['OPT']
+        cflags = ' '.join(str(x) for x in (basecflags, opt, extra_cflags) if x)
         if os.environ.has_key('CFLAGS'):
-            cflags = opt + ' ' + os.environ['CFLAGS']
+            cflags = ' '.join(str(x) for x in (basecflags, opt, os.environ['CFLAGS'], extra_cflags) if x)
             ldshared = ldshared + ' ' + os.environ['CFLAGS']
         if os.environ.has_key('CPPFLAGS'):
             cpp = cpp + ' ' + os.environ['CPPFLAGS']
@@ -201,7 +207,7 @@ def get_makefile_filename():
     if python_build:
         return os.path.join(os.path.dirname(sys.executable), "Makefile")
     lib_dir = get_python_lib(plat_specific=1, standard_lib=1)
-    return os.path.join(lib_dir, "config", "Makefile")
+    return os.path.join(lib_dir, "config" + (sys.pydebug and "_d" or ""), "Makefile")
 
 
 def parse_config_h(fp, g=None):

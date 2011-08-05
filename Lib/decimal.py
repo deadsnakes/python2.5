@@ -146,6 +146,12 @@ ROUND_UP = 'ROUND_UP'
 ROUND_HALF_DOWN = 'ROUND_HALF_DOWN'
 ROUND_05UP = 'ROUND_05UP'
 
+import string
+
+def ascii_upper(s):
+    trans_table = string.maketrans(string.ascii_lowercase, string.ascii_uppercase)
+    return s.translate(trans_table)
+
 # Errors
 
 class DecimalException(ArithmeticError):
@@ -3354,7 +3360,7 @@ rounding_functions = [name for name in Decimal.__dict__.keys()
                                     if name.startswith('_round_')]
 for name in rounding_functions:
     # name is like _round_half_even, goes to the global ROUND_HALF_EVEN value.
-    globalname = name[1:].upper()
+    globalname = ascii_upper(name[1:])
     val = globals()[globalname]
     Decimal._pick_rounding_function[val] = name
 

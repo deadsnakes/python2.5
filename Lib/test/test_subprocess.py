@@ -596,6 +596,34 @@ class ProcessTestCase(unittest.TestCase):
             os.remove(fname)
             self.assertEqual(rc, 47)
 
+        def test_eintr(self):
+            # retries on EINTR for an argv
+
+            # send ourselves a signal that causes EINTR
+            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
+            signal.alarm(1)
+            time.sleep(0.5)
+
+            rc = subprocess.Popen(['sleep', '1'])
+            self.assertEqual(rc.wait(), 0)
+
+            signal.signal(signal.SIGALRM, prev_handler)
+
+        def test_eintr_out(self):
+            # retries on EINTR for a shell call and pipelining
+
+            # send ourselves a signal that causes EINTR
+            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
+            signal.alarm(1)
+            time.sleep(0.5)
+
+            rc = subprocess.Popen("sleep 1; echo hello",
+                shell=True, stdout=subprocess.PIPE)
+            out = rc.communicate()[0]
+            self.assertEqual(rc.returncode, 0)
+            self.assertEqual(out, "hello\n")
+
+            signal.signal(signal.SIGALRM, prev_handler)
 
     #
     # Windows tests
