@@ -904,11 +904,14 @@ endif
 
 
 
-# Simply rebuild configure to contain any changes made to configure.in by patches.
-patch:
+# Simply rebuild configure once to contain any changes made to configure.in by patches.
+patch: patch-stamp
+
+patch-stamp: configure.in
 	rm -rf autom4te.cache configure
 	autoconf
 	autoheader
+	touch patch-stamp
 
 
 binary: binary-indep binary-arch
