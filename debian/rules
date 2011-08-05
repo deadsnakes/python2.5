@@ -412,9 +412,7 @@ stamp-doc-html:
 
 stamp-doc-info:
 	dh_testdir
-	patch -p0 < debian/patches/libre.diff
 	$(MAKE) -C Doc/info VERSION=$(VER)
-	patch -R -p0 < debian/patches/libre.diff
 	touch stamp-doc-info
 
 build-doc: patch-stamp stamp-build-doc
@@ -445,7 +443,6 @@ endif
 clean: control-file
 	dh_testdir
 	dh_testroot
-	$(MAKE) -f debian/rules unpatch
 	rm -f stamp-*
 	rm -f patch-stamp* pxxx
 	rm -f debian/test_results
@@ -460,7 +457,6 @@ clean: control-file
 	-find -name '*.py[co]' | xargs -n 50 rm -f
 	rm -rf locales
 	rm -rf $(d)-dbg
-	rm -f Lib/email/test/data/audiotest.au Lib/test/audiotest.au
 
 	for f in debian/*.in; do \
 	    f2=`echo $$f | sed "s,PVER,$(PVER),g;s/@VER@/$(VER)/g;s,\.in$$,,"`; \
@@ -568,7 +564,6 @@ endif
 	: # Install sitecustomize.py.
 	dh_installdirs -p$(p_min) etc/$(PVER)
 	cp -p debian/sitecustomize.py $(d_min)/etc/$(PVER)/
-	patch -d $(d_min)/$(scriptdir) < debian/patches/site-builddir.diff
 	dh_link -p$(p_min) /etc/$(PVER)/sitecustomize.py \
 		/$(scriptdir)/sitecustomize.py
 
@@ -907,142 +902,14 @@ endif
 	dh_md5sums -a
 	dh_builddeb -a
 
-# rules to patch the unpacked files in the source directory
-# ---------------------------------------------------------------------------
-# various rules to unpack addons and (un)apply patches.
-# 	- patch / apply-patches
-#	- unpatch / reverse-patches
 
-patchdir	= debian/patches
 
-debian_doc_patches = \
-	doc-faq \
-	profile-doc \
-	signal.set_wakeup_fd-doc \
-
-# which patches should be applied?
-debian_patches = \
-	deb-setup \
-	deb-locations \
-	locale-module \
-	distutils-link \
-	distutils-sysconfig \
-	test-sundry \
-	tkinter-import \
-	link-opt \
-	egg-info-no-version \
-	debug-build \
-	hotshot-import \
-	subprocess-eintr-safety \
-	webbrowser \
-	linecache \
-	hurd-broken-poll \
-	issue961805 \
-	signal.set_wakeup_fd \
-	no-zip-on-sys.path \
-	issue1813 \
-	linux2-platforms \
-	distutils-install-layout \
-	ctypes_findlib \
-	readline6 \
-	calendar \
-	makesetup-bashism \
-	emacs23-build \
-	tk8.5-compat \
-	issue8140 \
-	texi-direntries \
-	issue4961 \
-	issue8154 \
-	issue1923 \
-	issue8233 \
-	issue7332 \
-	issue8329 \
-
-#	svn-updates \
-#	svn-doc-updates \
-#	pydebug-path \
-
-ifeq ($(with_fpectl),yes)
-  debian_patches += \
-	enable-fpectl
-endif
-
-ifeq ($(DEB_BUILD_ARCH),arm)
-  debian_patches += arm-float
-endif
-
-#	svn-updates \
-#	patchlevel \
-#	distutils-debian \
-#	html-docs \
-#	patchlevel \
-
-glibc_version := $(shell dpkg -s locales | awk '/^Version:/ {print $$2}')
-broken_utimes := $(shell dpkg --compare-versions $(glibc_version) lt 2.3.5 && echo yes || echo no)
-ifeq ($(broken_utimes),yes)
-  debian_patches += \
-	disable-utimes
-endif
-
-ifeq ($(distribution),Ubuntu)
-  debian_patches += \
-	langpack-gettext
-endif
-
-ifeq ($(DEB_BUILD_ARCH_OS),hurd)
-  debian_patches += \
-	no-large-file-support \
-	cthreads
-endif
-
-ifneq (,$(findstring -doc, $(PKGSOURCE)))
-  debian_patches := $(debian_doc_patches)
-else
-  debian_patches += $(debian_doc_patches)
-endif
-
-patch: patch-stamp
-apply-patches: patch-stamp
-
-patch-stamp: $(foreach p,$(debian_patches),patch-stamp-$(p))
-	echo ""; echo "Patches applied in this version:" > pxxx
-	for i in $(debian_patches); do \
-	  echo "" >> pxxx; echo "$$i:" >> pxxx; \
-	  sed -n 's/^# *DP: */  /p' $(patchdir)/$$i.dpatch >> pxxx; \
-	done
+# Simply rebuild configure to contain any changes made to configure.in by patches.
+patch:
 	rm -rf autom4te.cache configure
 	autoconf
 	autoheader
-	uudecode debian/guido.au.uue
-	cp guido.au Lib/email/test/data/audiotest.au
-	mv guido.au Lib/test/audiotest.au
-	mv -f pxxx $@
 
-reverse-patches: unpatch
-unpatch:
-	for stamp in none `ls -1t patch-stamp-* 2>/dev/null`; do \
-	  case "$$stamp" in none|patched-stamp|patched-\*) continue; esac; \
-	  patch=`echo $$stamp | sed -e 's,patch-stamp-,,'`; \
-	  echo "trying to revert patch $$patch ..."; \
-	  if [ -x $(patchdir)/$$patch.dpatch ]; then true; else \
-	    chmod +x $(patchdir)/$$patch.dpatch; fi; \
-	  if $(patchdir)/$$patch.dpatch -unpatch; then \
-	    echo "reverted $$patch patch."; \
-	    rm -f $$stamp; \
-	  else \
-	    echo "error in reverting $$patch patch."; \
-	    exit 1; \
-	  fi; \
-	done
-	rm -f patch-stamp
-
-patch-stamp-%: $(patchdir)/%.dpatch
-	if [ -x $< ]; then true; else chmod +x $<; fi
-	if [ -f $@ ]; then \
-	  echo "$* patches already applied."; exit 1; \
-	fi
-	$< -patch
-	echo "$* patches applied." > $@
 
 binary: binary-indep binary-arch
 
