@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5), autoconf, libreadline-dev, libncursesw5-dev (>=
 Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, @PVER@-xml, python-xml
 XS-Python-Version: @VER@
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://python.org/
 Vcs-Browser: https://code.launchpad.net/~doko/python/pkg@VER@
 Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg@VER@
