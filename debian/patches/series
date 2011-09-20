@@ -42,3 +42,4 @@ doc-faq.diff
 # This patch is Ubuntu-specific; remove it if you're targeting something else.
 gettext-use-ubuntu-langpacks.diff
 adjust-libdb-versions.patch
+backport-bsddb-from-py2.7.2.diff
