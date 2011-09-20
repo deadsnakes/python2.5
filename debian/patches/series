@@ -41,4 +41,4 @@ doc-faq.diff
 
 # This patch is Ubuntu-specific; remove it if you're targeting something else.
 gettext-use-ubuntu-langpacks.diff
-bump-max-libdb-version.diff
+use-libdb4.7.diff
