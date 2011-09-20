@@ -1,3 +1,9 @@
+python2.5 (2.5.6-0~ppa2~lucid1) lucid; urgency=low
+
+  * Make bsddb work again by using libdb 4.7.
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 21 Sep 2011 00:29:27 +0200
+
 python2.5 (2.5.6-0~ppa1~lucid1) lucid; urgency=low
 
   * Imported new upstream version 2.5.6.
