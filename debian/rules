@@ -187,7 +187,7 @@ ifeq ($(with_fpectl),yes)
 endif
 
 stamps/stamp-configure-shared: stamps/stamp-configure
-	rm -rf $(buildd_shared)
+	rm -rf $(buildd_shared) stamps/stamp-build-shared
 	mkdir -p $(buildd_shared)
 	cd $(buildd_shared) && \
 	  CC="$(CC)" $(OPTSETTINGS) \
@@ -198,7 +198,8 @@ stamps/stamp-configure-shared: stamps/stamp-configure
 	touch stamps/stamp-configure-shared
 
 stamps/stamp-configure-static: stamps/stamp-configure
-	rm -rf $(buildd_static)
+	rm -rf $(buildd_static) stamps/stamp-build-static stamps/stamp-mincheck \
+	  stamps/stamp-check stamps/stamp-pystone stamps/stamp-pybench
 	mkdir -p $(buildd_static)
 	cd $(buildd_static) && \
 	  CC="$(CC)" $(OPTSETTINGS) \
@@ -214,7 +215,7 @@ stamps/stamp-configure-static: stamps/stamp-configure
 	touch stamps/stamp-configure-static
 
 stamps/stamp-configure-debug: stamps/stamp-configure
-	rm -rf $(buildd_debug)
+	rm -rf $(buildd_debug) stamps/stamp-build-debug
 	mkdir -p $(buildd_debug)
 	cd $(buildd_debug) && \
 	  CC="$(CC)" $(OPTDEBUGSETTINGS) \
@@ -503,7 +504,7 @@ endif
 	: # add additional files
 	cp -p Lib/plat-mac/plistlib.py $(d)/usr/lib/python$(VER)/
 
-	: # remove files, which are not packaged
+	: # remove files which are not packaged
 	rm -f $(d)/usr/bin/smtpd.py
 
 	: # move manpages to new names
@@ -763,7 +764,7 @@ endif
 	chmod 755 $(d_dbg)/usr/bin/$(PVER)-dbg-config
 	cp -p $(buildd_debug)/build/lib*/*_d.so \
 		$(d_dbg)/$(scriptdir)/lib-dynload/
-	
+
 ifeq ($(with_gdbm),yes)
 	# move debug files to corresponding debug package
 	dh_installdirs -p$(p_gdbm_dbg) $(scriptdir)/lib-dynload
@@ -772,7 +773,7 @@ ifeq ($(with_gdbm),yes)
 endif
 	rm -f $(d_dbg)/$(scriptdir)/lib-dynload/gdbm_d.so
 	rm -f $(d_dbg)/usr/lib/debug/$(scriptdir)/lib-dynload/gdbm.so
-	
+
 ifeq ($(with_tk),yes)
 	# move debug files to corresponding debug package
 	dh_installdirs -p$(p_tk_dbg) $(scriptdir)/lib-dynload
@@ -781,7 +782,7 @@ ifeq ($(with_tk),yes)
 endif
 	rm -f $(d_dbg)/$(scriptdir)/lib-dynload/_tkinter_d.so
 	rm -f $(d_dbg)/usr/lib/debug/$(scriptdir)/lib-dynload/_tkinter.so
-	
+
 	cp -a $(d)-dbg/$(scriptdir)/config_d $(d_dbg)/$(scriptdir)/
 	for i in $(d_dev)/usr/include/$(PVER)/*; do \
 	  i=$$(basename $$i); \
@@ -871,7 +872,7 @@ binary-arch: build install
 	  ln -s $(p_base) debian/$$i/usr/share/doc/$$i; \
 	done
 	-find debian ! -perm -200 -print -exec chmod +w {} \;
-	
+
 ifneq ($(with_tk),yes)
 	rm -f $(d_base)/$(scriptdir)/lib-dynload/_tkinter.so
 else
@@ -904,13 +905,10 @@ endif
 	dh_md5sums -a
 	dh_builddeb -a
 
-
-# Simply rebuild configure once to contain any changes made to configure.in by patches.
-patch: stamps stamps/stamp-configure
-
 stamps:
 	mkdir -p stamps
 
+# Simply rebuild configure once to contain any changes made to configure.in by patches.
 stamps/stamp-configure: stamps configure.in
 	rm -rf autom4te.cache configure
 	autoconf
