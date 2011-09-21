@@ -143,7 +143,7 @@ d_dbg	:= debian/$(p_dbg)
 
 build: $(build_target)
 build-all: build-arch build-indep
-build-indep:
+build-indep: stamps/stamp-build
 build-arch: stamps/stamp-build
 stamps/stamp-build: stamps/stamp-build-static stamps/stamp-build-shared stamps/stamp-build-debug stamps/stamp-mincheck stamps/stamp-check stamps/stamp-pystone stamps/stamp-pybench $(doc_dependencies)
 	touch stamps/stamp-build
