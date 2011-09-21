@@ -299,8 +299,6 @@ class PyBuildExt(build_ext):
         lib_dirs = self.compiler.library_dirs + [
             '/lib64', '/usr/lib64',
             '/lib', '/usr/lib',
-            '/lib/%s' % os.getenv('DEB_BUILD_MULTIARCH'),
-            '/usr/lib/%s' % os.getenv('DEB_BUILD_MULTIARCH')
             ]
         inc_dirs = self.compiler.include_dirs + ['/usr/include']
         gnu_triplet = os.popen('dpkg-architecture -qDEB_HOST_GNU_TYPE').readline()[:-1]; print 'XXX', gnu_triplet
@@ -614,11 +612,11 @@ class PyBuildExt(build_ext):
         # a release.  Most open source OSes come with one or more
         # versions of BerkeleyDB already installed.
 
-        max_db_ver = (4, 8)
+        max_db_ver = (4, 5)
         # NOTE: while the _bsddb.c code links against BerkeleyDB 4.6.x
         # we leave that version disabled by default as it has proven to be
         # quite a buggy library release on many platforms.
-        min_db_ver = (4, 1)
+        min_db_ver = (3, 3)
         db_setup_debug = False   # verbose debug prints from this script?
 
         # construct a list of paths to look for the header file in on

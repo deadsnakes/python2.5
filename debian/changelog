@@ -1,3 +1,10 @@
+python2.5 (2.5.6-0~ppa2~lucid1) lucid; urgency=low
+
+  * Make bsddb work again by backporting _bsddb.c from (the Debian package
+    for) Python 2.7. 
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 21 Sep 2011 00:45:11 +0200
+
 python2.5 (2.5.6-0~ppa1~natty1) natty; urgency=low
 
   * Imported from Lucid package.
