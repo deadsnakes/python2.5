@@ -37,3 +37,5 @@ arm-float.diff
 signal.set_wakeup_fd-doc.diff
 doc-faq.diff
 gettext-use-ubuntu-langpacks.diff
+adjust-libdb-versions.patch
+backport-bsddb-from-py2.7.2.diff
