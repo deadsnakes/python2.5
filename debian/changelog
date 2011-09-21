@@ -1,8 +1,15 @@
-python2.5 (2.5.6-0~ppa1~oneiric1) oneiric; urgency=low
+python2.5 (2.5.6-0~ppa2~natty1) natty; urgency=low
 
-  * Imported from Natty package.
+  * Import from Lucid package.
 
- -- Felix Krull <f_krull@gmx.de>  Tue, 20 Sep 2011 21:22:00 +0200
+ -- Felix Krull <f_krull@gmx.de>  Wed, 21 Sep 2011 13:49:18 +0200
+
+python2.5 (2.5.6-0~ppa2~lucid1) lucid; urgency=low
+
+  * Make bsddb work again by backporting _bsddb.c from (the Debian package
+    for) Python 2.7. 
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 21 Sep 2011 00:45:11 +0200
 
 python2.5 (2.5.6-0~ppa1~natty1) natty; urgency=low
 
