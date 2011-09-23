@@ -1,3 +1,9 @@
+python2.5 (2.5.6-0~ppa3~oneiric1) oneiric; urgency=low
+
+  * Import from Lucid package.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 23 Sep 2011 23:58:48 +0200
+
 python2.5 (2.5.6-0~ppa3~lucid1) lucid; urgency=low
 
   * Fix support for PEP370.
