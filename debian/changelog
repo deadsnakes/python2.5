@@ -1,3 +1,10 @@
+python2.5 (2.5.6-0~ppa4~lucid1) lucid; urgency=low
+
+  * Fix Breaks and Replaces for python2.5-minimal so they work for any
+    distribution that is not Lucid.
+
+ -- Felix Krull <f_krull@gmx.de>  Sat, 24 Sep 2011 00:17:27 +0200
+
 python2.5 (2.5.6-0~ppa3~lucid1) lucid; urgency=low
 
   * Fix support for PEP370.
