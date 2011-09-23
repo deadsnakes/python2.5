@@ -1,3 +1,10 @@
+python2.5 (2.5.6-0~ppa3~lucid1) lucid; urgency=low
+
+  * Fix support for PEP370.
+    - It was moved around accidentally which lead to some upgrade problems.
+
+ -- Felix Krull <f_krull@gmx.de>  Fri, 23 Sep 2011 23:23:08 +0200
+
 python2.5 (2.5.6-0~ppa2~oneiric1) oneiric; urgency=low
 
   * Import from Natty package.
