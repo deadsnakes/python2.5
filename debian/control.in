@@ -30,7 +30,8 @@ Package: @PVER@-minimal
 Architecture: any
 Priority: @MINPRIO@
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: @PVER@ (<< 2.5.5-7)
+Replaces: @PVER@ (<< 2.5.5-7), @PVER@ (= 2.5.6-0~ppa2~lucid1)
+Breaks: @PVER@ (= 2.5.6-0~ppa2~lucid1)
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
 Recommends: @PVER@
