@@ -30,8 +30,8 @@ Package: python2.5-minimal
 Architecture: any
 Priority: required
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: python2.5 (<< 2.5.5-7), python2.5 (= 2.5.6-0~ppa2~lucid1)
-Breaks: python2.5 (= 2.5.6-0~ppa2~lucid1)
+Replaces: python2.5 (<< 2.5.5-7), python2.5 (<< 2.5.6-0~ppa3)
+Breaks: python2.5 (<< 2.5.6-0~ppa3)
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
 Recommends: python2.5
