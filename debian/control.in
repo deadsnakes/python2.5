@@ -48,8 +48,8 @@ Architecture: any
 Section: libs
 Priority: @PRIO@
 Depends: @PVER@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Breaks: @PVER@ (<< 2.5.6-0~ppa5)
-Replaces: @PVER@ (<< 2.5.6-0~ppa5)
+Breaks: @PVER@ (<< 2.5.6-1)
+Replaces: @PVER@ (<< 2.5.6-1)
 Description: Shared Python runtime library (v@VER@)
  Version @VER@ of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
