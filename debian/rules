@@ -127,6 +127,7 @@ p_exam	:= $(PVER)-examples
 p_idle	:= idle-$(PVER)
 p_doc	:= $(PVER)-doc
 p_dbg	:= $(PVER)-dbg
+lib_p   := lib$(PVER)
 
 d_base	:= debian/$(p_base)
 d_min	:= debian/$(p_min)
@@ -565,6 +566,9 @@ ifneq ($(with_interp),static)
 	DH_COMPAT=2 dh_movefiles -p$(p_min) --sourcedir=$(d) \
 		usr/lib/libpython$(VER).so.*
 endif
+
+	# Install libpython into libpython$(VER) package
+	dh_movefiles --sourcedir=$(d) -p$(lib_p) usr/lib/lib$(PVER).so.1 usr/lib/lib$(PVER).so.1.0
 
 	: # Install sitecustomize.py.
 	dh_installdirs -p$(p_min) etc/$(PVER)

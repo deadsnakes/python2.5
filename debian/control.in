@@ -43,6 +43,21 @@ Description: A minimal subset of the Python language (version @VER@)
  See /usr/share/doc/@PVER@-minimal/README.Debian for a list of the modules
  contained in this package.
 
+Package: lib@PVER@
+Architecture: any
+Section: libs
+Priority: @PRIO@
+Depends: @PVER@ (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Breaks: @PVER@ (<< 2.5.6-0~ppa5)
+Replaces: @PVER@ (<< 2.5.6-0~ppa5)
+Description: Shared Python runtime library (v@VER@)
+ Version @VER@ of the high-level, interactive object oriented language,
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package contains the shared runtime library, normally not needed
+ for programs using the statically linked interpreter.
+
 Package: @PVER@-examples
 Architecture: all
 Depends: @PVER@ (>= ${binary:Version}), ${misc:Depends}
@@ -52,7 +67,7 @@ Description: Examples for the Python language (v@VER@)
 
 Package: @PVER@-dev
 Architecture: any
-Depends: @PVER@ (= ${binary:Version}), ${misc:Depends}
+Depends: @PVER@ (= ${binary:Version}), lib@PVER@ (= ${binary:Version}), ${misc:Depends}
 Replaces: python2.5 (<< 2.5.1-6)
 Recommends: libc6-dev | libc-dev, gcc
 Suggests: python-old-doctools
