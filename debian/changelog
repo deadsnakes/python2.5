@@ -1,3 +1,11 @@
+python2.5 (2.5.6-1+lucid1) lucid; urgency=low
+
+  * Build a separate libpython2.5 package that contains only the shared
+    libraries.
+  * (Also, introduce a cleaner version numbering scheme.)
+
+ -- Felix Krull <f_krull@gmx.de>  Sat, 24 Sep 2011 16:37:54 +0200
+
 python2.5 (2.5.6-0~ppa4~maverick1) maverick; urgency=low
 
   * Import from Lucid package.
