@@ -43,6 +43,21 @@ Description: A minimal subset of the Python language (version 2.5)
  See /usr/share/doc/python2.5-minimal/README.Debian for a list of the modules
  contained in this package.
 
+Package: libpython2.5
+Architecture: any
+Section: libs
+Priority: optional
+Depends: python2.5 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Breaks: python2.5 (<< 2.5.6-1)
+Replaces: python2.5 (<< 2.5.6-1)
+Description: Shared Python runtime library (v2.5)
+ Version 2.5 of the high-level, interactive object oriented language,
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package contains the shared runtime library, normally not needed
+ for programs using the statically linked interpreter.
+
 Package: python2.5-examples
 Architecture: all
 Depends: python2.5 (>= ${binary:Version}), ${misc:Depends}
@@ -52,7 +67,7 @@ Description: Examples for the Python language (v2.5)
 
 Package: python2.5-dev
 Architecture: any
-Depends: python2.5 (= ${binary:Version}), ${misc:Depends}
+Depends: python2.5 (= ${binary:Version}), libpython2.5 (= ${binary:Version}), ${misc:Depends}
 Replaces: python2.5 (<< 2.5.1-6)
 Recommends: libc6-dev | libc-dev, gcc
 Suggests: python-old-doctools
