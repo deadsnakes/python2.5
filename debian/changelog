@@ -2,7 +2,7 @@ python2.5 (2.5.6-1+maverick1) maverick; urgency=low
 
   * Import from Lucid package.
 
- -- Felix Krull <f_krull@gmx.de>  Mon, 23 Jan 2012 19:22:38 +0100
+ -- Felix Krull <f_krull@gmx.de>  Wed, 25 Jan 2012 16:55:37 +0100
 
 python2.5 (2.5.6-1+lucid1) lucid; urgency=low
 
