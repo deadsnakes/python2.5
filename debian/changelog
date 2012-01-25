@@ -1,3 +1,9 @@
+python2.5 (2.5.6-1+precise1) precise; urgency=low
+
+  * Imported from Oneiric package.
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 25 Jan 2012 20:04:01 +0100
+
 python2.5 (2.5.6-1+oneiric1) oneiric; urgency=low
 
   * Import from Lucid package.
