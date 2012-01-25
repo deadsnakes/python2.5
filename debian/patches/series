@@ -47,3 +47,4 @@ deadsnakes-multiarch-library-dirs.diff
 
 adjust-libdb-versions.patch
 backport-bsddb-from-py2.7.2.diff
+deadsnakes-ncursesw-include-dir.diff
