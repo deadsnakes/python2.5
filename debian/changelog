@@ -8,9 +8,11 @@ python2.5 (2.5.6-1+lucid1) lucid; urgency=low
 
   * Build a separate libpython2.5 package that contains only the shared
     libraries.
+  * Explicitly use ncursesw include path to avoid accidentally using the
+    ncurses headers (which libreadline-dev pulled in prior to precise).
   * (Also, introduce a cleaner version numbering scheme.)
 
- -- Felix Krull <f_krull@gmx.de>  Sat, 24 Sep 2011 16:37:54 +0200
+ -- Felix Krull <f_krull@gmx.de>  Wed, 25 Jan 2012 14:39:59 +0100
 
 python2.5 (2.5.6-0~ppa4~natty1) natty; urgency=low
 

@@ -299,8 +299,6 @@ class PyBuildExt(build_ext):
         lib_dirs = self.compiler.library_dirs + [
             '/lib64', '/usr/lib64',
             '/lib', '/usr/lib',
-            '/lib/%s' % os.getenv('DEB_BUILD_MULTIARCH'),
-            '/usr/lib/%s' % os.getenv('DEB_BUILD_MULTIARCH')
             ]
         inc_dirs = self.compiler.include_dirs + ['/usr/include']
         gnu_triplet = os.popen('dpkg-architecture -qDEB_HOST_GNU_TYPE').readline()[:-1]; print 'XXX', gnu_triplet
@@ -928,15 +926,13 @@ class PyBuildExt(build_ext):
         # Curses support, requiring the System V version of curses, often
         # provided by the ncurses library.
         panel_library = 'panel'
-        ncursesw_incdirs = ["/usr/include/ncursesw"]
         if (self.compiler.find_library_file(lib_dirs, 'ncursesw')):
             curses_libs = ['ncursesw']
             # Bug 1464056: If _curses.so links with ncursesw,
             # _curses_panel.so must link with panelw.
             panel_library = 'panelw'
             exts.append( Extension('_curses', ['_cursesmodule.c'],
-                                   libraries = curses_libs,
-                                   include_dirs = ncursesw_incdirs) )
+                                   libraries = curses_libs) )
         elif (self.compiler.find_library_file(lib_dirs, 'ncurses')):
             curses_libs = ['ncurses']
             exts.append( Extension('_curses', ['_cursesmodule.c'],
@@ -959,8 +955,7 @@ class PyBuildExt(build_ext):
         if (module_enabled(exts, '_curses') and
             self.compiler.find_library_file(lib_dirs, panel_library)):
             exts.append( Extension('_curses_panel', ['_curses_panel.c'],
-                                   libraries = [panel_library] + curses_libs,
-                                   include_dirs = ncursesw_incdirs) )
+                                   libraries = [panel_library] + curses_libs) )
 
         # Build `fpectl` module if Python is configured with --with-fpectl
         data = open('pyconfig.h').read()
