@@ -1,3 +1,9 @@
+python2.5 (2.5.6-2+lucid1) lucid; urgency=low
+
+  * Added python2.5-complete metapackage.
+
+ -- Felix Krull <f_krull@gmx.de>  Sat, 28 Jan 2012 19:04:30 +0100
+
 python2.5 (2.5.6-1+natty1) natty; urgency=low
 
   * Import from Lucid package.
