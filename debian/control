@@ -169,3 +169,30 @@ Description: GNU dbm database support for Python (v2.5 debug extension)
  .
  This package contains the extensions built for the python debug interpreter.
 
+
+Package: python2.5-complete
+Architecture: all
+Priority: optional
+Depends:
+ python2.5 (>= ${binary:Version}),
+ python2.5-minimal (>= ${binary:Version}),
+ libpython2.5 (>= ${binary:Version}),
+ python2.5-examples (>= ${binary:Version}),
+ python2.5-dev (>= ${binary:Version}),
+ idle-python2.5 (>= ${binary:Version}),
+ python2.5-doc (>= ${binary:Version}),
+ python2.5-dbg (>= ${binary:Version}),
+ python2.5-tk (>= ${binary:Version}),
+ python2.5-gdbm (>= ${binary:Version}),
+ python2.5-tk-dbg (>= ${binary:Version}),
+ python2.5-gdbm-dbg (>= ${binary:Version}),
+ ${shlibs:Depends}, ${misc:Depends}
+XB-Python-Version: 2.5
+Description: An interactive high-level object-oriented language (version 2.5)
+ Version 2.5 of the high-level, interactive object oriented language,
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package depends on all individual packages that were generated from the
+ python2.5 source package.
+
