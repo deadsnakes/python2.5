@@ -175,8 +175,7 @@ stamps/stamp-build-debug: stamps/stamp-configure-debug
 common_configure_args = \
 		--prefix=/usr \
 		--enable-ipv6 \
-		--enable-unicode=ucs4 \
-		--without-cxx
+		--enable-unicode=ucs4
 
 ifeq ($(DEB_BUILD_ARCH), avr32)
   common_configure_args += --without-ffi
