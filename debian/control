@@ -3,11 +3,11 @@ Section: python
 Priority: optional
 Maintainer: Felix Krull <f_krull@gmx.de>
 XSBC-Original-Maintainer: Matthias Klose <doko@debian.org>
-Build-Depends: debhelper (>= 5), autoconf, libreadline-dev, libncursesw5-dev (>= 5.3), tk8.5-dev, libdb4.8-dev, zlib1g-dev, libgdbm-dev, blt-dev (>= 2.4z), libssl-dev, libbz2-dev, libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!avr32 !m68k], libsqlite3-dev, libffi-dev (>= 3.0.5-2), mime-support, libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], netbase, lsb-release, bzip2, tk8.5-dev, blt-dev (>= 2.4z-4.1), libgdbm-dev, python
+Build-Depends: debhelper (>= 5), autoconf, libreadline-dev, libncursesw5-dev (>= 5.3), tk8.5-dev, libdb-dev, zlib1g-dev, libgdbm-dev, blt-dev (>= 2.4z), libssl-dev, libbz2-dev, libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!avr32 !m68k], libsqlite3-dev, libffi-dev (>= 3.0.5-2), mime-support, libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], netbase, lsb-release, bzip2
 Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, python2.5-xml, python-xml
 XS-Python-Version: 2.5
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Homepage: http://python.org/
 Vcs-Browser: https://code.launchpad.net/~doko/python/pkg2.5
 Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg2.5
@@ -18,8 +18,6 @@ Priority: optional
 Depends: python2.5-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: python2.5-doc
 Provides: python2.5-cjkcodecs, python2.5-ctypes, python2.5-elementtree, python2.5-celementtree, python2.5-wsgiref, python2.5-plistlib, python2.5-profiler
-Replaces: python2.5-minimal (<< 2.5), python2.5-dev (<< 2.5.1), idle-python2.5 (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
-Conflicts: python-central (<< 0.5.9), idle-python2.5 (<< 2.4.3+2.5b2-2), python-tk (<< 2.4.3-2)
 XB-Python-Version: 2.5
 Description: An interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,
@@ -30,8 +28,6 @@ Package: python2.5-minimal
 Architecture: any
 Priority: required
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Replaces: python2.5 (<< 2.5.5-7), python2.5 (<< 2.5.6-0~ppa3)
-Breaks: python2.5 (<< 2.5.6-0~ppa3)
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
 Recommends: python2.5
@@ -48,8 +44,6 @@ Architecture: any
 Section: libs
 Priority: optional
 Depends: python2.5 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
-Breaks: python2.5 (<< 2.5.6-1)
-Replaces: python2.5 (<< 2.5.6-1)
 Description: Shared Python runtime library (v2.5)
  Version 2.5 of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
@@ -187,7 +181,6 @@ Depends:
  python2.5-tk-dbg (>= ${binary:Version}),
  python2.5-gdbm-dbg (>= ${binary:Version}),
  ${shlibs:Depends}, ${misc:Depends}
-Suggests: python-distribute-deadsnakes
 XB-Python-Version: 2.5
 Description: An interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,
