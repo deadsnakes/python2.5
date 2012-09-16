@@ -13,4 +13,4 @@
 +        min_db_ver = (4, 8)
          db_setup_debug = False   # verbose debug prints from this script?
  
-         # construct a list of paths to look for the header file in on
+         def allow_db_ver(db_ver):

@@ -367,7 +367,7 @@ $(LIBRARY): $(LIBRARY_OBJS)
 	$(AR) cr $@ $(MODOBJS)
 	$(RANLIB) $@
 
-libpython$(VERSION)$(DEBUG_EXT).so: $(LIBRARY_OBJS)
+libpython$(VERSION).so: $(LIBRARY_OBJS)
 	if test $(INSTSONAME) != $(LDLIBRARY); then \
 		$(LDSHARED) $(LDFLAGS) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
 		$(LN) -f $(INSTSONAME) $@; \
@@ -375,7 +375,7 @@ libpython$(VERSION)$(DEBUG_EXT).so: $(LIBRARY_OBJS)
 		$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
 	fi
 
-libpython$(VERSION)$(DEBUG_EXT).sl: $(LIBRARY_OBJS)
+libpython$(VERSION).sl: $(LIBRARY_OBJS)
 	$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST)
 
 # This rule is here for OPENSTEP/Rhapsody/MacOSX. It builds a temporary
