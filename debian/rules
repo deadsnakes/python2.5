@@ -710,10 +710,8 @@ endif
 	dh_link -p$(p_dev) usr/lib/python$(VER)/config/libpython$(VER).a \
 		usr/lib/libpython$(VER).a
 
-	: # backported python-config script
-	#sed -e "s,@EXENAME@,$(PY_INTERPRETER)," \
-	#	debian/python-config.in > $(d_dev)/usr/bin/$(PVER)-config
-	#chmod 755 $(d_dev)/usr/bin/$(PVER)-config
+	: # install $(PVER)-config into $(p_dev)
+	dh_movefiles -p$(p_dev) --sourcedir=$(d) usr/bin/$(PVER)-config
 
 	cp -p $(buildd_shared)/libpython$(VER)-pic.a \
 		$(d_dev)/usr/lib/python$(VER)/config/
@@ -858,9 +856,11 @@ endif
 	cp -p debian/$(PVER)-dbg.README.Debian \
 		$(d_dbg)/usr/share/doc/$(p_base)/README.debug
 	cp -p $(buildd_debug)/python $(d_dbg)/usr/bin/$(PVER)-dbg
-	#sed -e "s,@EXENAME@,$(PY_INTERPRETER)-dbg," \
-	#	debian/python-config.in > $(d_dbg)/usr/bin/$(PVER)-dbg-config
-	#chmod 755 $(d_dbg)/usr/bin/$(PVER)-dbg-config
+	: # create $(PVER)-dbg-config from regular $(PVER)-config
+	sed '1s,#!.*python[^ ]*\(.*\),#! $(PY_INTERPRETER)-dbg\1,' \
+		$(d)-dbg/usr/bin/$(PVER)-config \
+		> $(d_dbg)/usr/bin/$(PVER)-dbg-config
+	chmod 755 $(d_dbg)/usr/bin/$(PVER)-dbg-config
 	cp -p $(buildd_debug)/build/lib*/*_d.so \
 		$(d_dbg)/$(scriptdir)/lib-dynload/
 	cp -p $(buildd_shdebug)/libpython$(VER)_d.so.1.0 $(d_dbg)/usr/lib/
