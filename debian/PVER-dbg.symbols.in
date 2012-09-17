@@ -1,5 +1,5 @@
 libpython@VER@_d.so.1.0 python@VER@-dbg #MINVER#
- Py_InitModule4TraceRefs_64@Base @VER@
+ Py_InitModule4TraceRefs@Base @VER@
 #include "libpython.symbols"
  _PyDict_Dummy@Base @VER@
  _PyObject_DebugCheckAddress@Base @VER@
