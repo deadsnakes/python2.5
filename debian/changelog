@@ -2,8 +2,10 @@ python2.5 (2.5.6-3+natty1) natty; urgency=low
 
   * Build against default libdb version for a given distribution.
   * Backported pkg-config support (see Python issue #3585).
+  * Fix static debug library.
+  * Properly install python2.5-config, python2.5-dbg-config.
 
- -- Felix Krull <f_krull@gmx.de>  Mon, 17 Sep 2012 20:35:29 +0200
+ -- Felix Krull <f_krull@gmx.de>  Tue, 18 Sep 2012 16:17:37 +0200
 
 python2.5 (2.5.6-2+natty1) natty; urgency=low
 
