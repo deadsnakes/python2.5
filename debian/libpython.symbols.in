@@ -1030,7 +1030,6 @@
  _Py_delbitset@Base @VER@
  _Py_excepthandler@Base @VER@
  _Py_findlabel@Base @VER@
- (arch=i386 lpia)_Py_force_double@Base @VER@
  _Py_keyword@Base @VER@
  _Py_mergebitset@Base @VER@
  _Py_meta_grammar@Base @VER@
