@@ -49,7 +49,7 @@ export PVER=python2.5
 export PRIORITY=$(shell echo $(VER) | tr -d '.')0
 
 # For setup.py to feast upon.
-export DEB_HOST_MULTIARCH=$(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+export DEB_HOST_MULTIARCH=$(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 
 PREVVER	:= $(shell awk '/^python/ && NR > 1 {print substr($$2,2,length($$2)-2); exit}' debian/changelog)
 
