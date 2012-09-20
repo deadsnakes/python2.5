@@ -45,6 +45,9 @@ gettext-use-ubuntu-langpacks.diff
 # This one is Natty-and-newer-specific
 deadsnakes-multiarch-library-dirs.diff
 
-adjust-libdb-versions.patch
-backport-bsddb-from-py2.7.2.diff
+deadsnakes-libdb-search-from-py2.7.3.diff
+deadsnakes-libdb-versions.diff
+deadsnakes-bsddb-module-py2.7.2.diff
 deadsnakes-ncursesw-include-dir.diff
+deadsnakes-fix-debug-ext.diff
+deadsnakes-backport-pkg-config-support.diff

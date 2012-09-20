@@ -1,3 +1,13 @@
+python2.5 (2.5.6-3+lucid1) lucid; urgency=low
+
+  * Build against default libdb version for a given distribution.
+  * Backported pkg-config support (see Python issue #3585).
+  * Fix static debug library.
+  * Properly install python2.5-config, python2.5-dbg-config.
+  * Add build dependency on python (quantal seems to need that).
+
+ -- Felix Krull <f_krull@gmx.de>  Thu, 20 Sep 2012 15:39:32 +0200
+
 python2.5 (2.5.6-2+oneiric1) oneiric; urgency=low
 
   * Import from Lucid package.
