@@ -1,0 +1,4 @@
+@PVER@ binary: depends-on-python-minimal *
+@PVER@ binary: extra-license-file usr/lib/python2.5/LICENSE.txt
+@PVER@ binary: desktop-command-not-in-package /usr/share/applications/@PVER@.desktop /usr/bin/@PVER@
+@PVER@ binary: menu-command-not-in-package * /usr/bin/@PVER@

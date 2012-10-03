@@ -612,7 +612,7 @@ endif
 	rm -f $(d)/usr/lib/pkgconfig/python.pc
 
 	: # fix some file permissions
-	chmod a-x $(d)/$(scriptdir)/lib-tk/Tix.py
+	chmod a-x $(d)/$(scriptdir)/{runpy.py,lib-tk/Tix.py}
 
 	: # move manpages to new names
 	if [ -d $(d)/usr/man/man1 ]; then \
@@ -968,6 +968,7 @@ endif
 	done
 	-find $(d_doc) -name '*.txt' -perm 755 -exec chmod 644 {} \;
 
+	dh_lintian -i $(dh_args)
 	dh_installdeb -i $(dh_args)
 	dh_gencontrol -i $(dh_args)
 	dh_md5sums -i $(dh_args)
@@ -1018,6 +1019,7 @@ endif
 # which either can be built as builtin or extension.
 	sed -ri '/^ (_check_|asdl_|fast_save_|init)/d' \
 	  $(d_lib)/DEBIAN/symbols $(d_dbg)/DEBIAN/symbols
+	dh_lintian -a
 	dh_installdeb -a
 	dh_shlibdeps -a
 	dh_gencontrol -a

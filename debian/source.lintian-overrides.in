@@ -2,3 +2,4 @@
 @PVER@ source: debian-rules-ignores-make-clean-error *
 @PVER@ source: outdated-autotools-helper-file *Modules/_ctypes/libffi/config.guess *
 @PVER@ source: outdated-autotools-helper-file *Modules/_ctypes/libffi/config.sub *
+@PVER@ source: newer-standards-version *
