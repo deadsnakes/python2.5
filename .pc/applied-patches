@@ -45,3 +45,4 @@ deadsnakes-ncursesw-include-dir.diff
 deadsnakes-fix-debug-ext.diff
 deadsnakes-backport-pkg-config-support.diff
 deadsnakes-assert-use-system-ffi.diff
+deadsnakes-fix-manpage-syntax.diff
