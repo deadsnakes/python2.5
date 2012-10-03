@@ -25,6 +25,8 @@ Priority: @PRIO@
 Depends: @PVER@-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: @PVER@-doc, binutils
 Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, python@VER@-celementtree, python@VER@-wsgiref, @PVER@-profiler, python@VER@-plistlib
+Breaks: @PVER@-minimal (<< 2.5.6-4)
+Replaces: @PVER@-minimal (<< 2.5.6-4)
 XB-Python-Version: @VER@
 Description: An interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
@@ -38,6 +40,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: @PVER@
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Runtime: @PVER@
 XB-Python-Version: @VER@
 Description: A minimal subset of the Python language (version @VER@)
@@ -70,6 +74,8 @@ Package: @PVER@-dev
 Architecture: any
 Depends: @PVER@ (= ${binary:Version}), lib@PVER@ (= ${binary:Version}), libssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Recommends: libc6-dev | libc-dev
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 Description: Header files and a static library for Python (version @VER@)
  Header files, a static library and development tools for building
  Python (version @VER@) modules, extending the Python interpreter or embedding
@@ -81,6 +87,8 @@ Package: idle-@PVER@
 Architecture: all
 Depends: @PVER@, @PVER@-tk, ${misc:Depends}
 Enhances: @PVER@
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Version: @VER@
 Description: An IDE for Python (version @VER@) using Tkinter
  IDLE is an Integrated Development Environment for Python (version @VER@).

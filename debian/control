@@ -25,6 +25,8 @@ Priority: optional
 Depends: python2.5-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: python2.5-doc, binutils
 Provides: python2.5-cjkcodecs, python2.5-ctypes, python2.5-elementtree, python2.5-celementtree, python2.5-wsgiref, python2.5-profiler, python2.5-plistlib
+Breaks: python2.5-minimal (<< 2.5.6-4)
+Replaces: python2.5-minimal (<< 2.5.6-4)
 XB-Python-Version: 2.5
 Description: An interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,
@@ -38,6 +40,8 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: python2.5
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 XB-Python-Runtime: python2.5
 XB-Python-Version: 2.5
 Description: A minimal subset of the Python language (version 2.5)
@@ -70,6 +74,8 @@ Package: python2.5-dev
 Architecture: any
 Depends: python2.5 (= ${binary:Version}), libpython2.5 (= ${binary:Version}), libssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Recommends: libc6-dev | libc-dev
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 Description: Header files and a static library for Python (version 2.5)
  Header files, a static library and development tools for building
  Python (version 2.5) modules, extending the Python interpreter or embedding
@@ -81,6 +87,8 @@ Package: idle-python2.5
 Architecture: all
 Depends: python2.5, python2.5-tk, ${misc:Depends}
 Enhances: python2.5
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 XB-Python-Version: 2.5
 Description: An IDE for Python (version 2.5) using Tkinter
  IDLE is an Integrated Development Environment for Python (version 2.5).
