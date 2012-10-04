@@ -3,13 +3,13 @@ Section: python
 Priority: optional
 Maintainer: Felix Krull <f_krull@gmx.de>
 XSBC-Original-Maintainer: Matthias Klose <doko@debian.org>
-Build-Depends: debhelper (>= 5), autoconf,
-   mime-support, netbase, lsb-release, bzip2,
+Build-Depends: debhelper (>= 7), autoconf,
+   mime-support, netbase, lsb-release, bzip2, python,
    zlib1g-dev, libbz2-dev, libdb-dev, libssl-dev, libreadline-dev,
    libncursesw5-dev (>= 5.3), tk8.5-dev, blt-dev (>= 2.4z), libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64],
    libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!armel !avr32 !hppa !ia64 !mipsel],
    libsqlite3-dev, libffi-dev (>= 3.0.5-2), libgdbm-dev
-Build-Depends-Indep: python, libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
+Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, python2.5-xml, python-xml, autoconf2.13
 XS-Python-Version: 2.5
 Standards-Version: 3.9.3
@@ -25,8 +25,10 @@ Priority: optional
 Depends: python2.5-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: python2.5-doc, binutils
 Provides: python2.5-cjkcodecs, python2.5-ctypes, python2.5-elementtree, python2.5-celementtree, python2.5-wsgiref, python2.5-profiler, python2.5-plistlib
+Breaks: python2.5-minimal (<< 2.5.6-4)
+Replaces: python2.5-minimal (<< 2.5.6-4)
 XB-Python-Version: 2.5
-Description: An interactive high-level object-oriented language (version 2.5)
+Description: Interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
@@ -38,9 +40,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: python2.5
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 XB-Python-Runtime: python2.5
 XB-Python-Version: 2.5
-Description: A minimal subset of the Python language (version 2.5)
+Description: Minimal subset of the Python language (version 2.5)
  This package contains the interpreter and some essential modules.  It can
  be used in the boot process for some basic tasks.
  See /usr/share/doc/python2.5-minimal/README.Debian for a list of the modules
@@ -70,6 +74,8 @@ Package: python2.5-dev
 Architecture: any
 Depends: python2.5 (= ${binary:Version}), libpython2.5 (= ${binary:Version}), libssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Recommends: libc6-dev | libc-dev
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 Description: Header files and a static library for Python (version 2.5)
  Header files, a static library and development tools for building
  Python (version 2.5) modules, extending the Python interpreter or embedding
@@ -81,8 +87,10 @@ Package: idle-python2.5
 Architecture: all
 Depends: python2.5, python2.5-tk, ${misc:Depends}
 Enhances: python2.5
+Breaks: python2.5 (<< 2.5.6-4)
+Replaces: python2.5 (<< 2.5.6-4)
 XB-Python-Version: 2.5
-Description: An IDE for Python (version 2.5) using Tkinter
+Description: IDE for Python (version 2.5) using Tkinter
  IDLE is an Integrated Development Environment for Python (version 2.5).
  IDLE is written using Tkinter and therefore quite platform-independent.
 
@@ -124,8 +132,8 @@ Provides: ${python:Provides}
 Suggests: tix, python2.5-tk-dbg
 XB-Python-Version: ${python:Versions}
 Description: Tkinter - Writing Tk applications with Python (version 2.5)
- A module for writing portable GUI applications with Python (version 2.5) using Tk.
- Also known as Tkinter.
+ A module for writing portable GUI applications with Python (version 2.5)
+ using Tk. Also known as Tkinter.
 
 Package: python2.5-gdbm
 Architecture: any
@@ -143,10 +151,10 @@ Priority: extra
 Section: debug
 Depends: python2.5, ${python:Depends}, python2.5-tk (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Tkinter - Writing Tk applications with Python (version 2.5 debug extension)
- A module for writing portable GUI applications with Python (version 2.5) using Tk.
- Also known as Tkinter.
+ A module for writing portable GUI applications with Python (version 2.5)
+ using Tk. Also known as Tkinter.
  .
- This package contains the extensions built for the python debug interpreter.
+ This package contains the extensions built for the Python debug interpreter.
 
 Package: python2.5-gdbm-dbg
 Architecture: any
@@ -157,28 +165,27 @@ Description: GNU dbm database support for Python (version 2.5 debug extension)
  GNU dbm database module for Python (version 2.5). Install this if you want to
  create or read GNU dbm database files with Python.
  .
- This package contains the extensions built for the python debug interpreter.
+ This package contains the extensions built for the Python debug interpreter.
 
 
 Package: python2.5-complete
 Architecture: all
 Priority: extra
 Depends:
- python2.5 (>= ${binary:Version}),
- python2.5-minimal (>= ${binary:Version}),
- libpython2.5 (>= ${binary:Version}),
- python2.5-examples (>= ${binary:Version}),
- python2.5-dev (>= ${binary:Version}),
- idle-python2.5 (>= ${binary:Version}),
- python2.5-doc (>= ${binary:Version}),
- python2.5-dbg (>= ${binary:Version}),
- python2.5-tk (>= ${binary:Version}),
- python2.5-gdbm (>= ${binary:Version}),
- python2.5-tk-dbg (>= ${binary:Version}),
- python2.5-gdbm-dbg (>= ${binary:Version}),
+ python2.5 (>= ${source:Version}),
+ libpython2.5 (>= ${source:Version}),
+ python2.5-examples (>= ${source:Version}),
+ python2.5-dev (>= ${source:Version}),
+ idle-python2.5 (>= ${source:Version}),
+ python2.5-doc (>= ${source:Version}),
+ python2.5-dbg (>= ${source:Version}),
+ python2.5-tk (>= ${source:Version}),
+ python2.5-gdbm (>= ${source:Version}),
+ python2.5-tk-dbg (>= ${source:Version}),
+ python2.5-gdbm-dbg (>= ${source:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 XB-Python-Version: 2.5
-Description: An interactive high-level object-oriented language (version 2.5)
+Description: Interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
