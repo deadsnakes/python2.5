@@ -640,11 +640,11 @@ class PyBuildExt(build_ext):
         # a release.  Most open source OSes come with one or more
         # versions of BerkeleyDB already installed.
 
-        max_db_ver = (4, 5)
+        max_db_ver = (5, 3)
         # NOTE: while the _bsddb.c code links against BerkeleyDB 4.6.x
         # we leave that version disabled by default as it has proven to be
         # quite a buggy library release on many platforms.
-        min_db_ver = (3, 3)
+        min_db_ver = (4, 8)
         db_setup_debug = False   # verbose debug prints from this script?
 
         def allow_db_ver(db_ver):
@@ -1018,13 +1018,15 @@ class PyBuildExt(build_ext):
         # Curses support, requiring the System V version of curses, often
         # provided by the ncurses library.
         panel_library = 'panel'
+        ncursesw_incdirs = ["/usr/include/ncursesw"]
         if (self.compiler.find_library_file(lib_dirs, 'ncursesw')):
             curses_libs = ['ncursesw']
             # Bug 1464056: If _curses.so links with ncursesw,
             # _curses_panel.so must link with panelw.
             panel_library = 'panelw'
             exts.append( Extension('_curses', ['_cursesmodule.c'],
-                                   libraries = curses_libs) )
+                                   libraries = curses_libs,
+                                   include_dirs = ncursesw_incdirs) )
         elif (self.compiler.find_library_file(lib_dirs, 'ncurses')):
             curses_libs = ['ncurses']
             exts.append( Extension('_curses', ['_cursesmodule.c'],
@@ -1047,7 +1049,8 @@ class PyBuildExt(build_ext):
         if (module_enabled(exts, '_curses') and
             self.compiler.find_library_file(lib_dirs, panel_library)):
             exts.append( Extension('_curses_panel', ['_curses_panel.c'],
-                                   libraries = [panel_library] + curses_libs) )
+                                   libraries = [panel_library] + curses_libs,
+                                   include_dirs = ncursesw_incdirs) )
 
         # Build `fpectl` module if Python is configured with --with-fpectl
         data = open('pyconfig.h').read()
