@@ -3,13 +3,13 @@ Section: python
 Priority: optional
 Maintainer: Felix Krull <f_krull@gmx.de>
 XSBC-Original-Maintainer: Matthias Klose <doko@debian.org>
-Build-Depends: debhelper (>= 5), autoconf,
-   mime-support, netbase, lsb-release, bzip2,
+Build-Depends: debhelper (>= 7), autoconf,
+   mime-support, netbase, lsb-release, bzip2, python,
    zlib1g-dev, libbz2-dev, libdb-dev, libssl-dev, libreadline-dev,
    libncursesw5-dev (>= 5.3), tk8.5-dev, blt-dev (>= 2.4z), libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64],
    libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!armel !avr32 !hppa !ia64 !mipsel],
    libsqlite3-dev, libffi-dev (>= 3.0.5-2), libgdbm-dev
-Build-Depends-Indep: python, libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
+Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, @PVER@-xml, python-xml, autoconf2.13
 XS-Python-Version: @VER@
 Standards-Version: 3.9.3
@@ -25,8 +25,10 @@ Priority: @PRIO@
 Depends: @PVER@-minimal (= ${binary:Version}), mime-support, ${shlibs:Depends}, ${misc:Depends}
 Suggests: @PVER@-doc, binutils
 Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, python@VER@-celementtree, python@VER@-wsgiref, @PVER@-profiler, python@VER@-plistlib
+Breaks: @PVER@-minimal (<< 2.5.6-4)
+Replaces: @PVER@-minimal (<< 2.5.6-4)
 XB-Python-Version: @VER@
-Description: An interactive high-level object-oriented language (version @VER@)
+Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
@@ -38,9 +40,11 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: @PVER@
 Suggests: binfmt-support
 Conflicts: binfmt-support (<< 1.1.2)
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Runtime: @PVER@
 XB-Python-Version: @VER@
-Description: A minimal subset of the Python language (version @VER@)
+Description: Minimal subset of the Python language (version @VER@)
  This package contains the interpreter and some essential modules.  It can
  be used in the boot process for some basic tasks.
  See /usr/share/doc/@PVER@-minimal/README.Debian for a list of the modules
@@ -70,6 +74,8 @@ Package: @PVER@-dev
 Architecture: any
 Depends: @PVER@ (= ${binary:Version}), lib@PVER@ (= ${binary:Version}), libssl-dev, ${shlibs:Depends}, ${misc:Depends}
 Recommends: libc6-dev | libc-dev
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 Description: Header files and a static library for Python (version @VER@)
  Header files, a static library and development tools for building
  Python (version @VER@) modules, extending the Python interpreter or embedding
@@ -81,8 +87,10 @@ Package: idle-@PVER@
 Architecture: all
 Depends: @PVER@, @PVER@-tk, ${misc:Depends}
 Enhances: @PVER@
+Breaks: @PVER@ (<< 2.5.6-4)
+Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Version: @VER@
-Description: An IDE for Python (version @VER@) using Tkinter
+Description: IDE for Python (version @VER@) using Tkinter
  IDLE is an Integrated Development Environment for Python (version @VER@).
  IDLE is written using Tkinter and therefore quite platform-independent.
 
@@ -124,8 +132,8 @@ Provides: ${python:Provides}
 Suggests: tix, @PVER@-tk-dbg
 XB-Python-Version: ${python:Versions}
 Description: Tkinter - Writing Tk applications with Python (version @VER@)
- A module for writing portable GUI applications with Python (version @VER@) using Tk.
- Also known as Tkinter.
+ A module for writing portable GUI applications with Python (version @VER@)
+ using Tk. Also known as Tkinter.
 
 Package: @PVER@-gdbm
 Architecture: any
@@ -143,10 +151,10 @@ Priority: extra
 Section: debug
 Depends: @PVER@, ${python:Depends}, @PVER@-tk (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
 Description: Tkinter - Writing Tk applications with Python (version @VER@ debug extension)
- A module for writing portable GUI applications with Python (version @VER@) using Tk.
- Also known as Tkinter.
+ A module for writing portable GUI applications with Python (version @VER@)
+ using Tk. Also known as Tkinter.
  .
- This package contains the extensions built for the python debug interpreter.
+ This package contains the extensions built for the Python debug interpreter.
 
 Package: @PVER@-gdbm-dbg
 Architecture: any
@@ -157,28 +165,27 @@ Description: GNU dbm database support for Python (version @VER@ debug extension)
  GNU dbm database module for Python (version @VER@). Install this if you want to
  create or read GNU dbm database files with Python.
  .
- This package contains the extensions built for the python debug interpreter.
+ This package contains the extensions built for the Python debug interpreter.
 
 
 Package: @PVER@-complete
 Architecture: all
 Priority: extra
 Depends:
- @PVER@ (>= ${binary:Version}),
- @PVER@-minimal (>= ${binary:Version}),
- lib@PVER@ (>= ${binary:Version}),
- @PVER@-examples (>= ${binary:Version}),
- @PVER@-dev (>= ${binary:Version}),
- idle-@PVER@ (>= ${binary:Version}),
- @PVER@-doc (>= ${binary:Version}),
- @PVER@-dbg (>= ${binary:Version}),
- @PVER@-tk (>= ${binary:Version}),
- @PVER@-gdbm (>= ${binary:Version}),
- @PVER@-tk-dbg (>= ${binary:Version}),
- @PVER@-gdbm-dbg (>= ${binary:Version}),
+ @PVER@ (>= ${source:Version}),
+ lib@PVER@ (>= ${source:Version}),
+ @PVER@-examples (>= ${source:Version}),
+ @PVER@-dev (>= ${source:Version}),
+ idle-@PVER@ (>= ${source:Version}),
+ @PVER@-doc (>= ${source:Version}),
+ @PVER@-dbg (>= ${source:Version}),
+ @PVER@-tk (>= ${source:Version}),
+ @PVER@-gdbm (>= ${source:Version}),
+ @PVER@-tk-dbg (>= ${source:Version}),
+ @PVER@-gdbm-dbg (>= ${source:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 XB-Python-Version: @VER@
-Description: An interactive high-level object-oriented language (version @VER@)
+Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
