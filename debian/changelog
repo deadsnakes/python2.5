@@ -1,3 +1,9 @@
+python2.5 (2.5.6-4+quantal1) quantal; urgency=low
+
+  * Import from Lucid package.
+
+ -- Felix Krull <f_krull@gmx.de>  Thu, 04 Oct 2012 20:34:18 +0200
+
 python2.5 (2.5.6-4+lucid1) lucid; urgency=low
 
   * Add some conflicts with older package versions to fix upgrade issues for
