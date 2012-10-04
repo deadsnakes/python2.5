@@ -6,8 +6,9 @@ python2.5 (2.5.6-4+lucid1) lucid; urgency=low
   * Add descriptive error message to bdist_wininst command if the wininst
     executables are not found (they are in python2.5-dev).
   * Generally fix or override lintian source and binary warnings.
+  * Don't set rpath in sqlite and dbm modules.
 
- -- Felix Krull <f_krull@gmx.de>  Thu, 04 Oct 2012 00:10:59 +0200
+ -- Felix Krull <f_krull@gmx.de>  Thu, 04 Oct 2012 17:21:30 +0200
 
 python2.5 (2.5.6-3+lucid1) lucid; urgency=low
 
