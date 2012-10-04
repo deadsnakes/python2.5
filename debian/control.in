@@ -28,7 +28,7 @@ Provides: python@VER@-cjkcodecs, python@VER@-ctypes, python@VER@-elementtree, py
 Breaks: @PVER@-minimal (<< 2.5.6-4)
 Replaces: @PVER@-minimal (<< 2.5.6-4)
 XB-Python-Version: @VER@
-Description: An interactive high-level object-oriented language (version @VER@)
+Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
@@ -44,7 +44,7 @@ Breaks: @PVER@ (<< 2.5.6-4)
 Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Runtime: @PVER@
 XB-Python-Version: @VER@
-Description: A minimal subset of the Python language (version @VER@)
+Description: Minimal subset of the Python language (version @VER@)
  This package contains the interpreter and some essential modules.  It can
  be used in the boot process for some basic tasks.
  See /usr/share/doc/@PVER@-minimal/README.Debian for a list of the modules
@@ -90,7 +90,7 @@ Enhances: @PVER@
 Breaks: @PVER@ (<< 2.5.6-4)
 Replaces: @PVER@ (<< 2.5.6-4)
 XB-Python-Version: @VER@
-Description: An IDE for Python (version @VER@) using Tkinter
+Description: IDE for Python (version @VER@) using Tkinter
  IDLE is an Integrated Development Environment for Python (version @VER@).
  IDLE is written using Tkinter and therefore quite platform-independent.
 
@@ -185,7 +185,7 @@ Depends:
  @PVER@-gdbm-dbg (>= ${source:Version}),
  ${shlibs:Depends}, ${misc:Depends}
 XB-Python-Version: @VER@
-Description: An interactive high-level object-oriented language (version @VER@)
+Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
  includes an extensive class library with lots of goodies for
  network programming, system administration, sounds and graphics.
