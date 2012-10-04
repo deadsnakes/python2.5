@@ -47,3 +47,4 @@ deadsnakes-backport-pkg-config-support.diff
 deadsnakes-assert-use-system-ffi.diff
 deadsnakes-fix-manpage-syntax.diff
 bdist-wininst-notfound.diff
+deadsnakes-no-rpath.diff
