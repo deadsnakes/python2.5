@@ -183,7 +183,7 @@ Depends:
  python2.5-gdbm (>= ${source:Version}),
  python2.5-tk-dbg (>= ${source:Version}),
  python2.5-gdbm-dbg (>= ${source:Version}),
- ${shlibs:Depends}, ${misc:Depends}
+ ${misc:Depends}
 XB-Python-Version: 2.5
 Description: Interactive high-level object-oriented language (version 2.5)
  Version 2.5 of the high-level, interactive object oriented language,

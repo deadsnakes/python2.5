@@ -183,7 +183,7 @@ Depends:
  @PVER@-gdbm (>= ${source:Version}),
  @PVER@-tk-dbg (>= ${source:Version}),
  @PVER@-gdbm-dbg (>= ${source:Version}),
- ${shlibs:Depends}, ${misc:Depends}
+ ${misc:Depends}
 XB-Python-Version: @VER@
 Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
