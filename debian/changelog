@@ -1,3 +1,9 @@
+python2.5 (2.5.6-5+raring1) raring; urgency=low
+
+  * Import from Precise package.
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 21 Aug 2013 17:16:52 +0200
+
 python2.5 (2.5.6-5+precise1) precise; urgency=low
 
   * Enable binary hardening compile-time flags.
