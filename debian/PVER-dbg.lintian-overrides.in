@@ -2,4 +2,8 @@
 @PVER@-dbg binary: binary-without-manpage usr/bin/@PVER@-dbg-config
 @PVER@-dbg binary: non-dev-pkg-with-shlib-symlink usr/lib/lib@PVER@_d.so.1.0 usr/lib/lib@PVER@_d.so
 @PVER@-dbg binary: embedded-library usr/lib/@PVER@/lib-dynload/pyexpat_d.so: expat
-@PVER@-dbg binary: hardening-no-fortify-functions *
+@PVER@-dbg binary: unusual-interpreter usr/bin/@PVER@-dbg-config #!/usr/bin/@PVER@-dbg
+
+@PVER@-dbg binary: hardening-no-fortify-functions usr/lib/@PVER@/lib-dynload/*
+@PVER@-dbg binary: hardening-no-fortify-functions usr/lib/lib@PVER@_d.so.1.0
+@PVER@-dbg binary: hardening-no-fortify-functions usr/bin/@PVER@-dbg
