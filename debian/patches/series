@@ -47,7 +47,6 @@ gettext-use-ubuntu-langpacks.diff
 deadsnakes-add-multiarch-paths.diff
 deadsnakes-libdb-search-from-py2.7.3.diff
 deadsnakes-libdb-versions.diff
-deadsnakes-bsddb-module-py2.7.2.diff
 deadsnakes-ncursesw-include-dir.diff
 deadsnakes-fix-debug-ext.diff
 deadsnakes-backport-pkg-config-support.diff
@@ -55,3 +54,4 @@ deadsnakes-assert-use-system-ffi.diff
 deadsnakes-fix-manpage-syntax.diff
 bdist-wininst-notfound.diff
 deadsnakes-no-rpath.diff
+deadsnakes-bsddb-module-py2.7.x.py

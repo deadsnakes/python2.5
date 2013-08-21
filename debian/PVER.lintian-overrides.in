@@ -3,3 +3,5 @@
 @PVER@ binary: desktop-command-not-in-package usr/share/applications/@PVER@.desktop usr/bin/@PVER@
 @PVER@ binary: menu-command-not-in-package * usr/bin/@PVER@
 @PVER@ binary: embedded-library usr/lib/@PVER@/lib-dynload/pyexpat.so: expat
+
+@PVER@ binary: hardening-no-fortify-functions usr/lib/@PVER@/lib-dynload/*

@@ -8,11 +8,12 @@ Build-Depends: debhelper (>= 7), autoconf,
    zlib1g-dev, libbz2-dev, libdb-dev, libssl-dev, libreadline-dev,
    libncursesw5-dev (>= 5.3), tk8.5-dev, blt-dev (>= 2.4z), libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64],
    libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!armel !avr32 !hppa !ia64 !mipsel],
-   libsqlite3-dev, libffi-dev (>= 3.0.5-2), libgdbm-dev
+   libsqlite3-dev, libffi-dev (>= 3.0.5-2), libgdbm-dev,
+   dpkg-dev (>= 1.16.1~)
 Build-Depends-Indep: libhtml-tree-perl, texlive-latex-recommended, texinfo, emacs23, debiandoc-sgml, latex2html
 Build-Conflicts: tcl8.4-dev, tk8.4-dev, tcl8.3-dev, tk8.3-dev, @PVER@-xml, python-xml, autoconf2.13
 XS-Python-Version: @VER@
-Standards-Version: 3.9.3
+Standards-Version: 3.9.4
 Homepage: http://python.org/
 Vcs-Browser: https://bitbucket.org/fk/deadsnakes-@PVER@
 Vcs-Hg: https://bitbucket.org/fk/deadsnakes-@PVER@
@@ -110,7 +111,7 @@ Architecture: all
 Depends: ${misc:Depends}, dpkg (>= 1.15.4) | install-info
 Suggests: @PVER@
 Description: Documentation for the high-level object-oriented language Python (version @VER@)
- These is the official set of documentation for the interactive high-level
+ This is the official set of documentation for the interactive high-level
  object-oriented language Python (version @VER@). All documents are provided
  in HTML format, some in info format. The package consists of ten documents:
  .
@@ -183,7 +184,7 @@ Depends:
  @PVER@-gdbm (>= ${source:Version}),
  @PVER@-tk-dbg (>= ${source:Version}),
  @PVER@-gdbm-dbg (>= ${source:Version}),
- ${shlibs:Depends}, ${misc:Depends}
+ ${misc:Depends}
 XB-Python-Version: @VER@
 Description: Interactive high-level object-oriented language (version @VER@)
  Version @VER@ of the high-level, interactive object oriented language,
