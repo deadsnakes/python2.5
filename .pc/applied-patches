@@ -47,3 +47,4 @@ deadsnakes-assert-use-system-ffi.diff
 deadsnakes-fix-manpage-syntax.diff
 bdist-wininst-notfound.diff
 deadsnakes-no-rpath.diff
+deadsnakes-bsddb-module-py2.7.x.py
