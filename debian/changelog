@@ -1,3 +1,10 @@
+python2.5 (2.5.6-7+precise1) precise; urgency=low
+
+  * Include doc build fixes for Saucy and Trusty.
+  * Have sys.platform be linux2 even on Linux 3.* systems.
+
+ -- Felix Krull <f_krull@gmx.de>  Sat, 25 Jan 2014 18:21:38 +0100
+
 python2.5 (2.5.6-6+quantal1) quantal; urgency=low
 
   * Imported from Precise package.
