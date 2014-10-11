@@ -1,3 +1,9 @@
+python2.5 (2.5.6-8+utopic1) utopic; urgency=medium
+
+  * Imported from Precise package.
+
+ -- Felix Krull <f_krull@gmx.de>  Sat, 11 Oct 2014 14:05:21 +0200
+
 python2.5 (2.5.6-8+precise1) precise; urgency=low
 
   * Don't link extension modules to libpython on shared builds.
