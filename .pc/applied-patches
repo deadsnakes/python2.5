@@ -51,3 +51,4 @@ deadsnakes-bsddb-module-py2.7.x.diff
 deadsnakes-force-info-docs.diff
 deadsnakes-platform-linux2.diff
 ext-no-libpython-link.diff
+libffi-shared.diff
