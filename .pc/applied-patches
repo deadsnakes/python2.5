@@ -52,3 +52,4 @@ deadsnakes-force-info-docs.diff
 deadsnakes-platform-linux2.diff
 ext-no-libpython-link.diff
 libffi-shared.diff
+readline-6.3-compat.diff
