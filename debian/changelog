@@ -1,3 +1,10 @@
+python2.5 (2.5.6-9+utopic1) utopic; urgency=medium
+
+  * Imported from Precise package.
+  * Fix readline 6.3 build.
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 22 Oct 2014 00:36:06 +0200
+
 python2.5 (2.5.6-9+precise1) precise; urgency=medium
 
   * Link to shared libffi.
