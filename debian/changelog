@@ -1,3 +1,10 @@
+python2.5 (2.5.6-9+trusty1) trusty; urgency=medium
+
+  * Imported from Precise package.
+  * Properly build with readline 6.3.
+
+ -- Felix Krull <f_krull@gmx.de>  Wed, 22 Oct 2014 00:06:35 +0200
+
 python2.5 (2.5.6-9+precise1) precise; urgency=medium
 
   * Link to shared libffi.
