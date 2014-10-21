@@ -1,3 +1,9 @@
+python2.5 (2.5.6-9+precise1) precise; urgency=medium
+
+  * Link to shared libffi.
+
+ -- Felix Krull <f_krull@gmx.de>  Tue, 21 Oct 2014 23:34:04 +0200
+
 python2.5 (2.5.6-8+trusty1) trusty; urgency=medium
 
   * Imported from Precise package.
