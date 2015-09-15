@@ -1,3 +1,9 @@
+python2.5 (2.5.6-9+wily1) wily; urgency=medium
+
+  * Imported from Vivid package.
+
+ -- Felix Krull <f_krull@gmx.de>  Tue, 15 Sep 2015 14:43:14 +0200
+
 python2.5 (2.5.6-9+vivid1) vivid; urgency=medium
 
   * Imported from Precise package.
