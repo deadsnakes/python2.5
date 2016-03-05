@@ -1,0 +1,2 @@
+idle-@PVER@ binary: image-file-in-usr-lib *
+idle-@PVER@ binary: menu-icon-missing usr/share/pixmaps/@PVER@.xpm
