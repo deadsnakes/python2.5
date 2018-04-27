@@ -1,3 +1,10 @@
+python2.5 (2.5.6-9+bionic2) bionic; urgency=medium
+
+  * Relax emacs version check.
+  * Fix perl imports from . for perl 5.26.
+
+ -- Anthony Sottile <asottile@umich.edu>  Fri, 27 Apr 2018 08:26:59 -0700
+
 python2.5 (2.5.6-9+bionic1) bionic; urgency=medium
 
   * Imported from Xenial package.
