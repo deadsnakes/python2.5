@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:08 -0700
+Subject: deadsnakes-no-rpath
+
+---
+ setup.py | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 344bdfd..4b16285 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -832,16 +832,14 @@
+@@ -832,16 +832,14 @@ class PyBuildExt(build_ext):
                  print "bsddb lib dir:", dblib_dir, " inc dir:", db_incdir
              db_incs = [db_incdir]
              dblibs = [dblib]
@@ -22,7 +32,7 @@
                                    include_dirs=db_incs,
                                    libraries=dblibs))
          else:
-@@ -937,7 +935,7 @@
+@@ -937,7 +935,7 @@ class PyBuildExt(build_ext):
                                    include_dirs=["Modules/_sqlite",
                                                  sqlite_incdir],
                                    library_dirs=sqlite_libdir,
@@ -31,7 +41,7 @@
                                    extra_link_args=sqlite_extra_link_args,
                                    libraries=["sqlite3",]))
  
-@@ -987,7 +985,7 @@
+@@ -987,7 +985,7 @@ class PyBuildExt(build_ext):
              elif db_incs is not None:
                  exts.append( Extension('dbm', ['dbmmodule.c'],
                                         library_dirs=dblib_dir,

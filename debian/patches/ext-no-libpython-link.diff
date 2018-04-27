@@ -1,8 +1,17 @@
-# DP: Don't link extensions with the shared libpython library.
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:08 -0700
+Subject: ext-no-libpython-link
 
+# DP: Don't link extensions with the shared libpython library.
+---
+ Lib/distutils/command/build_ext.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Lib/distutils/command/build_ext.py b/Lib/distutils/command/build_ext.py
+index f1aeb11..b95223c 100644
 --- a/Lib/distutils/command/build_ext.py
 +++ b/Lib/distutils/command/build_ext.py
-@@ -198,7 +198,7 @@
+@@ -198,7 +198,7 @@ class build_ext (Command):
          # for extensions under Linux with a shared Python library,
          # Python's library directory must be appended to library_dirs
          if (sys.platform.startswith('linux') or sys.platform.startswith('gnu')) \
@@ -11,7 +20,7 @@
              if sys.executable.startswith(os.path.join(sys.exec_prefix, "bin")):
                  # building third party extensions
                  self.library_dirs.append(sysconfig.get_config_var('LIBDIR'))
-@@ -706,7 +706,7 @@
+@@ -706,7 +706,7 @@ class build_ext (Command):
  
          else:
              from distutils import sysconfig

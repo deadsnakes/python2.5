@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: webbrowser
+
+---
+ Lib/webbrowser.py | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/Lib/webbrowser.py b/Lib/webbrowser.py
+index 1e12a3e..00a7dfb 100644
 --- a/Lib/webbrowser.py
 +++ b/Lib/webbrowser.py
-@@ -456,8 +456,11 @@
+@@ -456,8 +456,11 @@ def register_X_browsers():
          if retncode is None and commd:
              register("gnome", None, BackgroundBrowser(shlex.split(commd)))
  
@@ -13,7 +23,7 @@
                      "mozilla-firebird", "firebird",
                      "seamonkey", "mozilla", "netscape"):
          if _iscommand(browser):
-@@ -496,6 +499,9 @@
+@@ -496,6 +499,9 @@ if os.environ.get("DISPLAY"):
  
  # Also try console browsers
  if os.environ.get("TERM"):

@@ -1,8 +1,17 @@
-# We always want the system libffi for the Ubuntu package.
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:08 -0700
+Subject: deadsnakes-assert-use-system-ffi
 
+# We always want the system libffi for the Ubuntu package.
+---
+ setup.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/setup.py b/setup.py
+index 50a48bb..344bdfd 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -1542,6 +1542,10 @@
+@@ -1542,6 +1542,10 @@ class PyBuildExt(build_ext):
              ext.libraries.append(ffi_lib)
              self.use_system_libffi = True
  

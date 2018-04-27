@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: egg-info-no-version
+
+---
+ Lib/distutils/command/install_egg_info.py | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/Lib/distutils/command/install_egg_info.py b/Lib/distutils/command/install_egg_info.py
+index c888031..c531797 100644
 --- a/Lib/distutils/command/install_egg_info.py
 +++ b/Lib/distutils/command/install_egg_info.py
-@@ -21,10 +21,9 @@
+@@ -21,10 +21,9 @@ class install_egg_info(Command):
  
      def finalize_options(self):
          self.set_undefined_options('install_lib',('install_dir','install_dir'))

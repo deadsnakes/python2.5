@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: linecache
+
+---
+ Lib/linecache.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/Lib/linecache.py b/Lib/linecache.py
+index 4838625..748dc51 100644
 --- a/Lib/linecache.py
 +++ b/Lib/linecache.py
-@@ -104,7 +104,11 @@
+@@ -104,7 +104,11 @@ def updatecache(filename, module_globals=None):
                          )
                          return cache[filename][2]
  

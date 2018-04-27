@@ -1,3 +1,13 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:08 -0700
+Subject: deadsnakes-fix-manpage-syntax
+
+---
+ Misc/python.man | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Misc/python.man b/Misc/python.man
+index 2596f90..d60c7ea 100644
 --- a/Misc/python.man
 +++ b/Misc/python.man
 @@ -1,7 +1,7 @@

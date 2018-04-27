@@ -1,43 +1,17 @@
---- a/Lib/test/test_subprocess.py
-+++ b/Lib/test/test_subprocess.py
-@@ -596,6 +596,34 @@
-             os.remove(fname)
-             self.assertEqual(rc, 47)
- 
-+        def test_eintr(self):
-+            # retries on EINTR for an argv
-+
-+            # send ourselves a signal that causes EINTR
-+            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
-+            signal.alarm(1)
-+            time.sleep(0.5)
-+
-+            rc = subprocess.Popen(['sleep', '1'])
-+            self.assertEqual(rc.wait(), 0)
-+
-+            signal.signal(signal.SIGALRM, prev_handler)
-+
-+        def test_eintr_out(self):
-+            # retries on EINTR for a shell call and pipelining
-+
-+            # send ourselves a signal that causes EINTR
-+            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
-+            signal.alarm(1)
-+            time.sleep(0.5)
-+
-+            rc = subprocess.Popen("sleep 1; echo hello",
-+                shell=True, stdout=subprocess.PIPE)
-+            out = rc.communicate()[0]
-+            self.assertEqual(rc.returncode, 0)
-+            self.assertEqual(out, "hello\n")
-+
-+            signal.signal(signal.SIGALRM, prev_handler)
- 
-     #
-     # Windows tests
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: subprocess-eintr-safety
+
+---
+ Lib/subprocess.py           | 78 ++++++++++++++++++++++++++++++++++++++-------
+ Lib/test/test_subprocess.py | 28 ++++++++++++++++
+ 2 files changed, 95 insertions(+), 11 deletions(-)
+
+diff --git a/Lib/subprocess.py b/Lib/subprocess.py
+index 80be087..f6abf8d 100644
 --- a/Lib/subprocess.py
 +++ b/Lib/subprocess.py
-@@ -656,13 +656,13 @@
+@@ -656,13 +656,13 @@ class Popen(object):
              stderr = None
              if self.stdin:
                  if input:
@@ -54,7 +28,7 @@
                  self.stderr.close()
              self.wait()
              return (stdout, stderr)
-@@ -984,6 +984,62 @@
+@@ -984,6 +984,62 @@ class Popen(object):
                      pass
  
  
@@ -117,7 +91,7 @@
          def _execute_child(self, args, executable, preexec_fn, close_fds,
                             cwd, env, universal_newlines,
                             startupinfo, creationflags, shell,
-@@ -1071,7 +1127,7 @@
+@@ -1071,7 +1127,7 @@ class Popen(object):
                                                             exc_value,
                                                             tb)
                      exc_value.child_traceback = ''.join(exc_lines)
@@ -126,7 +100,7 @@
  
                  # This exitcode won't be reported to applications, so it
                  # really doesn't matter what we return.
-@@ -1089,10 +1145,10 @@
+@@ -1089,10 +1145,10 @@ class Popen(object):
                  os.close(errwrite)
  
              # Wait for exec to fail or succeed; possibly raising exception
@@ -139,7 +113,7 @@
                  child_exception = pickle.loads(data)
                  raise child_exception
  
-@@ -1112,7 +1168,7 @@
+@@ -1112,7 +1168,7 @@ class Popen(object):
              attribute."""
              if self.returncode is None:
                  try:
@@ -148,7 +122,7 @@
                      if pid == self.pid:
                          self._handle_exitstatus(sts)
                  except os.error:
-@@ -1125,7 +1181,7 @@
+@@ -1125,7 +1181,7 @@ class Popen(object):
              """Wait for child process to terminate.  Returns returncode
              attribute."""
              if self.returncode is None:
@@ -157,7 +131,7 @@
                  self._handle_exitstatus(sts)
              return self.returncode
  
-@@ -1164,21 +1220,21 @@
+@@ -1164,21 +1220,21 @@ class Popen(object):
                      # When select has indicated that the file is writable,
                      # we can write up to PIPE_BUF bytes without risk
                      # blocking.  POSIX defines PIPE_BUF >= 512
@@ -182,3 +156,42 @@
                      if data == "":
                          self.stderr.close()
                          read_set.remove(self.stderr)
+diff --git a/Lib/test/test_subprocess.py b/Lib/test/test_subprocess.py
+index 123d4a0..3a635eb 100644
+--- a/Lib/test/test_subprocess.py
++++ b/Lib/test/test_subprocess.py
+@@ -596,6 +596,34 @@ class ProcessTestCase(unittest.TestCase):
+             os.remove(fname)
+             self.assertEqual(rc, 47)
+ 
++        def test_eintr(self):
++            # retries on EINTR for an argv
++
++            # send ourselves a signal that causes EINTR
++            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
++            signal.alarm(1)
++            time.sleep(0.5)
++
++            rc = subprocess.Popen(['sleep', '1'])
++            self.assertEqual(rc.wait(), 0)
++
++            signal.signal(signal.SIGALRM, prev_handler)
++
++        def test_eintr_out(self):
++            # retries on EINTR for a shell call and pipelining
++
++            # send ourselves a signal that causes EINTR
++            prev_handler = signal.signal(signal.SIGALRM, lambda x,y: 1)
++            signal.alarm(1)
++            time.sleep(0.5)
++
++            rc = subprocess.Popen("sleep 1; echo hello",
++                shell=True, stdout=subprocess.PIPE)
++            out = rc.communicate()[0]
++            self.assertEqual(rc.returncode, 0)
++            self.assertEqual(out, "hello\n")
++
++            signal.signal(signal.SIGALRM, prev_handler)
+ 
+     #
+     # Windows tests

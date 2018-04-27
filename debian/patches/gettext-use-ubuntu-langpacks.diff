@@ -1,10 +1,16 @@
-Description: Support Ubuntu langpacks
- Support alternative gettext tree in /usr/share/locale-langpack; if a file is
- present in both trees, prefer the newer one
-Forwarded: not-needed
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:07 -0700
+Subject: gettext-use-ubuntu-langpacks
+
+---
+ Lib/gettext.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/Lib/gettext.py b/Lib/gettext.py
+index 90ebc51..b52e8c0 100644
 --- a/Lib/gettext.py
 +++ b/Lib/gettext.py
-@@ -446,11 +446,26 @@
+@@ -446,11 +446,26 @@ def find(domain, localedir=None, languages=None, all=0):
          if lang == 'C':
              break
          mofile = os.path.join(localedir, lang, 'LC_MESSAGES', '%s.mo' % domain)

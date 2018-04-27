@@ -1,8 +1,18 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: hurd-broken-poll
+
 # DP: Fix build failure on hurd, working around poll() on systems
 # DP: on which it returns an error on invalid FDs.
+---
+ Modules/selectmodule.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Modules/selectmodule.c b/Modules/selectmodule.c
+index 4deab6f..cf82e6c 100644
 --- a/Modules/selectmodule.c
 +++ b/Modules/selectmodule.c
-@@ -674,7 +674,7 @@
+@@ -674,7 +674,7 @@ On Windows and OpenVMS, only sockets are supported; on Unix, all file descriptor
  
  static PyMethodDef select_methods[] = {
      {"select",	select_select, METH_VARARGS, select_doc},
@@ -11,7 +21,7 @@
      {"poll",    select_poll,   METH_NOARGS, poll_doc},
  #endif /* HAVE_POLL */
      {0,  	0},			     /* sentinel */
-@@ -697,7 +697,7 @@
+@@ -697,7 +697,7 @@ initselect(void)
  	SelectError = PyErr_NewException("select.error", NULL, NULL);
  	Py_INCREF(SelectError);
  	PyModule_AddObject(m, "error", SelectError);

@@ -1,9 +1,19 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:06 -0700
+Subject: ctypes_findlib
+
 # DP: ctypes.util.find_library(): Determine the shared object name of a library
 # DP: using ldconfig only, only fall back to objdump/gcc if ldconfig fails.
 # DP: Raise exceptions if gcc or objdump cannot be found.
+---
+ Lib/ctypes/util.py | 40 ++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 36 insertions(+), 4 deletions(-)
+
+diff --git a/Lib/ctypes/util.py b/Lib/ctypes/util.py
+index fc17a2f..2590296 100644
 --- a/Lib/ctypes/util.py
 +++ b/Lib/ctypes/util.py
-@@ -49,18 +49,20 @@
+@@ -49,18 +49,20 @@ elif os.name == "posix":
          expr = r'[^\(\)\s]*lib%s\.[^\(\)\s]*' % re.escape(name)
          fdout, ccout = tempfile.mkstemp()
          os.close(fdout)
@@ -26,7 +36,7 @@
          res = re.search(expr, trace)
          if not res:
              return None
-@@ -82,7 +84,13 @@
+@@ -82,7 +84,13 @@ elif os.name == "posix":
              # assuming GNU binutils / ELF
              if not f:
                  return None
@@ -41,7 +51,7 @@
              res = re.search(r'\sSONAME\s+([^\s]+)', os.popen(cmd).read())
              if not res:
                  return None
-@@ -128,8 +136,32 @@
+@@ -128,8 +136,32 @@ elif os.name == "posix":
                      return None
              return res.group(0)
  

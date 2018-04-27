@@ -1,7 +1,18 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:06 -0700
+Subject: calendar
+
 # DP: Fix Lib/calendar.py, broken title tag
+---
+ Lib/calendar.py           | 2 +-
+ Lib/test/test_calendar.py | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Lib/calendar.py b/Lib/calendar.py
+index 3190b72..5a8ebf3 100644
 --- a/Lib/calendar.py
 +++ b/Lib/calendar.py
-@@ -473,7 +473,7 @@
+@@ -473,7 +473,7 @@ class HTMLCalendar(Calendar):
          a('<meta http-equiv="Content-Type" content="text/html; charset=%s" />\n' % encoding)
          if css is not None:
              a('<link rel="stylesheet" type="text/css" href="%s" />\n' % css)
@@ -10,9 +21,11 @@
          a('</head>\n')
          a('<body>\n')
          a(self.formatyear(theyear, width))
+diff --git a/Lib/test/test_calendar.py b/Lib/test/test_calendar.py
+index e414324..75eaebd 100644
 --- a/Lib/test/test_calendar.py
 +++ b/Lib/test/test_calendar.py
-@@ -49,7 +49,7 @@
+@@ -49,7 +49,7 @@ result_2004_html = """
  <head>
  <meta http-equiv="Content-Type" content="text/html; charset=ascii" />
  <link rel="stylesheet" type="text/css" href="calendar.css" />

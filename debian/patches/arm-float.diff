@@ -1,7 +1,17 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:07 -0700
+Subject: arm-float
+
 # DP: Support mixed-endian IEEE floating point, as found in the ARM old-ABI.
+---
+ Objects/floatobject.c | 60 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 60 insertions(+)
+
+diff --git a/Objects/floatobject.c b/Objects/floatobject.c
+index fa09084..81211a1 100644
 --- a/Objects/floatobject.c
 +++ b/Objects/floatobject.c
-@@ -982,7 +982,11 @@
+@@ -982,7 +982,11 @@ float_getnewargs(PyFloatObject *v)
  /* this is for the benefit of the pack/unpack routines below */
  
  typedef enum {
@@ -13,7 +23,7 @@
  } float_format_type;
  
  static float_format_type double_format, float_format;
-@@ -1021,6 +1025,10 @@
+@@ -1021,6 +1025,10 @@ float_getformat(PyTypeObject *v, PyObject* arg)
  		return PyString_FromString("IEEE, little-endian");
  	case ieee_big_endian_format:
  		return PyString_FromString("IEEE, big-endian");
@@ -24,7 +34,7 @@
  	default:
  		Py_FatalError("insane float_format or double_format");
  		return NULL;
-@@ -1073,11 +1081,21 @@
+@@ -1073,11 +1081,21 @@ float_setformat(PyTypeObject *v, PyObject* args)
  	else if (strcmp(format, "IEEE, big-endian") == 0) {
  		f = ieee_big_endian_format;
  	}
@@ -46,7 +56,7 @@
  		return NULL;
  
  	}
-@@ -1230,6 +1248,10 @@
+@@ -1230,6 +1248,10 @@ _PyFloat_Init(void)
  			detected_double_format = ieee_big_endian_format;
  		else if (memcmp(&x, "\x05\x04\x03\x02\x01\xff\x3f\x43", 8) == 0)
  			detected_double_format = ieee_little_endian_format;
@@ -57,7 +67,7 @@
  		else 
  			detected_double_format = unknown_format;
  	}
-@@ -1565,8 +1587,23 @@
+@@ -1565,8 +1587,23 @@ _PyFloat_Pack8(double x, unsigned char *p, int le)
  			p += 7;
  			incr = -1;
  		}
@@ -81,7 +91,7 @@
  			*p = *s++;
  			p += incr;
  		}
-@@ -1739,6 +1776,29 @@
+@@ -1739,6 +1776,29 @@ _PyFloat_Unpack8(const unsigned char *p, int le)
  			}
  			memcpy(&x, buf, 8);
  		}

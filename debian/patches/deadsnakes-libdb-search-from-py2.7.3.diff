@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:07 -0700
+Subject: deadsnakes-libdb-search-from-py2.7.3
+
+---
+ setup.py | 102 +++++++++++++++++++++++++++++++++++++++++++++++++++------------
+ 1 file changed, 83 insertions(+), 19 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 8b9dbed..27c9af3 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -647,28 +647,60 @@
+@@ -647,28 +647,60 @@ class PyBuildExt(build_ext):
          min_db_ver = (3, 3)
          db_setup_debug = False   # verbose debug prints from this script?
  
@@ -64,7 +74,7 @@
              db_inc_paths.append('/usr/include/db3%d' % x)
              db_inc_paths.append('/usr/local/BerkeleyDB.3.%d/include' % x)
              db_inc_paths.append('/usr/local/include/db3%d' % x)
-@@ -683,24 +715,31 @@
+@@ -683,24 +715,31 @@ class PyBuildExt(build_ext):
          for dn in inc_dirs:
              std_variants.append(os.path.join(dn, 'db3'))
              std_variants.append(os.path.join(dn, 'db4'))
@@ -99,7 +109,7 @@
                  if db_setup_debug: print "db: looking for db.h in", f
                  if os.path.exists(f):
                      f = open(f).read()
-@@ -720,18 +759,29 @@
+@@ -720,18 +759,29 @@ class PyBuildExt(build_ext):
                                  print "being ignored (4.6.x must be >= 4.6.21)"
                                  continue
  
@@ -134,7 +144,7 @@
  
              db_found_vers = db_ver_inc_map.keys()
              db_found_vers.sort()
-@@ -742,14 +792,26 @@
+@@ -742,14 +792,26 @@ class PyBuildExt(build_ext):
  
                  # check lib directories parallel to the location of the header
                  db_dirs_to_check = [
@@ -167,7 +177,7 @@
                  # XXX should we -ever- look for a dbX name?  Do any
                  # systems really not name their library by version and
                  # symlink to more general names?
-@@ -765,8 +827,9 @@
+@@ -765,8 +827,9 @@ class PyBuildExt(build_ext):
                          if db_setup_debug: print "db lib: ", dblib, "not found"
  
          except db_found:
@@ -179,7 +189,7 @@
              db_incs = [db_incdir]
              dblibs = [dblib]
              # We add the runtime_library_dirs argument because the
-@@ -776,6 +839,7 @@
+@@ -776,6 +839,7 @@ class PyBuildExt(build_ext):
              # some unusual system configurations (e.g. the directory
              # is on an NFS server that goes away).
              exts.append(Extension('_bsddb', ['_bsddb.c'],

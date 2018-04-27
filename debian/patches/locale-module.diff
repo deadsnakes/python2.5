@@ -1,6 +1,16 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:05 -0700
+Subject: locale-module
+
+---
+ Lib/locale.py | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/Lib/locale.py b/Lib/locale.py
+index 4695b72..b969804 100644
 --- a/Lib/locale.py
 +++ b/Lib/locale.py
-@@ -1254,8 +1254,8 @@
+@@ -1254,8 +1254,8 @@ locale_alias = {
      'uk_ua.iso88595':                       'uk_UA.ISO8859-5',
      'uk_ua.koi8u':                          'uk_UA.KOI8-U',
      'uk_ua.microsoftcp1251':                'uk_UA.CP1251',
@@ -11,7 +21,7 @@
      'universal.utf8@ucs4':                  'en_US.UTF-8',
      'ur':                                   'ur_PK.CP1256',
      'ur_pk':                                'ur_PK.CP1256',
-@@ -1274,6 +1274,8 @@
+@@ -1274,6 +1274,8 @@ locale_alias = {
      'wa_be.iso88591':                       'wa_BE.ISO8859-1',
      'wa_be.iso885915':                      'wa_BE.ISO8859-15',
      'wa_be@euro':                           'wa_BE.ISO8859-15',

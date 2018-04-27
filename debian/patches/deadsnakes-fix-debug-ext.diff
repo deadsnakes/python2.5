@@ -1,6 +1,39 @@
+From: Felix Krull <f_krull@gmx.de>
+Date: Fri, 27 Apr 2018 08:24:07 -0700
+Subject: deadsnakes-fix-debug-ext
+
+---
+ Makefile.pre.in |  4 ++--
+ configure.in    | 34 ++++++++++++++++++----------------
+ 2 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/Makefile.pre.in b/Makefile.pre.in
+index 8cf9c27..6d3cce3 100644
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
+@@ -367,7 +367,7 @@ $(LIBRARY): $(LIBRARY_OBJS)
+ 	$(AR) cr $@ $(MODOBJS)
+ 	$(RANLIB) $@
+ 
+-libpython$(VERSION).so: $(LIBRARY_OBJS)
++libpython$(VERSION)$(DEBUG_EXT).so: $(LIBRARY_OBJS)
+ 	if test $(INSTSONAME) != $(LDLIBRARY); then \
+ 		$(LDSHARED) $(LDFLAGS) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
+ 		$(LN) -f $(INSTSONAME) $@; \
+@@ -375,7 +375,7 @@ libpython$(VERSION).so: $(LIBRARY_OBJS)
+ 		$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
+ 	fi
+ 
+-libpython$(VERSION).sl: $(LIBRARY_OBJS)
++libpython$(VERSION)$(DEBUG_EXT).sl: $(LIBRARY_OBJS)
+ 	$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST)
+ 
+ # This rule is here for OPENSTEP/Rhapsody/MacOSX. It builds a temporary
+diff --git a/configure.in b/configure.in
+index 2f7bd62..91b36c3 100644
 --- a/configure.in
 +++ b/configure.in
-@@ -525,7 +525,7 @@
+@@ -525,7 +525,7 @@ AC_SUBST(LIBRARY)
  AC_MSG_CHECKING(LIBRARY)
  if test -z "$LIBRARY"
  then
@@ -9,7 +42,7 @@
  fi
  AC_MSG_RESULT($LIBRARY)
  
-@@ -636,21 +636,21 @@
+@@ -636,21 +636,21 @@ if test $enable_shared = "yes"; then
    AC_DEFINE(Py_ENABLE_SHARED, 1, [Defined if Python is built as a shared library.])
    case $ac_sys_system in
      BeOS*)
@@ -38,7 +71,7 @@
  	  RUNSHARED=LD_LIBRARY_PATH=`pwd`:${LD_LIBRARY_PATH}
  	  case $ac_sys_system in
  	      FreeBSD*)
-@@ -662,23 +662,23 @@
+@@ -662,23 +662,23 @@ if test $enable_shared = "yes"; then
      hp*|HP*)
  	  case `uname -m` in
  		ia64)
@@ -69,7 +102,7 @@
  	  RUNSHARED=DLL_PATH=`pwd`:${DLL_PATH:-/atheos/sys/libs:/atheos/autolnk/lib}
  	  ;;
    esac
-@@ -686,7 +686,7 @@
+@@ -686,7 +686,7 @@ else # shared is disabled
    case $ac_sys_system in
      CYGWIN*)
            BLDLIBRARY='$(LIBRARY)'
@@ -78,7 +111,7 @@
            ;;
    esac
  fi
-@@ -745,6 +745,8 @@
+@@ -745,6 +745,8 @@ fi],
  if test "$Py_DEBUG" = 'true'
  then
  	DEBUG_EXT=_d
@@ -87,23 +120,3 @@
  fi
  AC_SUBST(DEBUG_EXT)
  
---- a/Makefile.pre.in
-+++ b/Makefile.pre.in
-@@ -367,7 +367,7 @@
- 	$(AR) cr $@ $(MODOBJS)
- 	$(RANLIB) $@
- 
--libpython$(VERSION).so: $(LIBRARY_OBJS)
-+libpython$(VERSION)$(DEBUG_EXT).so: $(LIBRARY_OBJS)
- 	if test $(INSTSONAME) != $(LDLIBRARY); then \
- 		$(LDSHARED) $(LDFLAGS) -Wl,-h$(INSTSONAME) -o $(INSTSONAME) $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
- 		$(LN) -f $(INSTSONAME) $@; \
-@@ -375,7 +375,7 @@
- 		$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
- 	fi
- 
--libpython$(VERSION).sl: $(LIBRARY_OBJS)
-+libpython$(VERSION)$(DEBUG_EXT).sl: $(LIBRARY_OBJS)
- 	$(LDSHARED) $(LDFLAGS) -o $@ $(LIBRARY_OBJS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST)
- 
- # This rule is here for OPENSTEP/Rhapsody/MacOSX. It builds a temporary
